@@ -10,7 +10,6 @@
         public string Telefono { get; set; }
         public string Fecha_Nac { get; set; }
         public string Legajo { get; set; }
-        public string Tipo_Persona { get; set; }
 
     }
 }

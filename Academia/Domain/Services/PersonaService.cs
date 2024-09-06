@@ -3,7 +3,7 @@ using Domain.Context;
 
 namespace Domain.Services
 {
-    internal class PersonaService
+    public class PersonaService
     {
         public void Add(Persona persona)
         {
@@ -49,8 +49,16 @@ namespace Domain.Services
             if (personaToUpdate != null)
             {
                 personaToUpdate.Nombre = persona.Nombre;
+                personaToUpdate.Apellido = persona.Apellido;
+                personaToUpdate.Direccion = persona.Direccion;
+                personaToUpdate.Email = persona.Email;
+                personaToUpdate.Telefono = persona.Telefono;
+                personaToUpdate.Fecha_Nac = persona.Fecha_Nac;
+                personaToUpdate.Legajo = persona.Legajo;
+
                 context.SaveChanges();
             }
         }
+
     }
 }
