@@ -9,6 +9,7 @@ namespace Domain.Context
     {
         internal DbSet<Persona> Personas { get; set; }
         internal DbSet<Plan> Planes { get; set; }
+        internal DbSet<Especialidad> Especialidades { get; set; }
 
         internal AcademiaContext()
         {
