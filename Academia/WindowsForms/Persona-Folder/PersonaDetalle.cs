@@ -52,7 +52,7 @@ namespace WindowsForms
 
         private async void aceptarButton_Click(object sender, EventArgs e)
         {
-            ApiClient<Persona> client = new ApiClient<Persona>("personas");
+            PersonaApiClient client = new PersonaApiClient();
 
             if (this.ValidatePersona())
             {
@@ -67,11 +67,11 @@ namespace WindowsForms
 
                 if (this.EditMode)
                 {
-                    await client.UpdateAsync(this.Persona);
+                    await PersonaApiClient.UpdateAsync(this.Persona);
                 }
                 else
                 {
-                    await client.AddAsync(this.Persona);
+                    await PersonaApiClient.AddAsync(this.Persona);
                 }
 
                 this.Close();
@@ -143,9 +143,9 @@ namespace WindowsForms
 
         private async void PersonaDetalle_Load(object sender, EventArgs e)
         {
-            ApiClient<Plan> clientPlan = new ApiClient<Plan>("planes");
+            PlanApiClient clientPlan = new PlanApiClient();
 
-            this.planes = await clientPlan.GetAllAsync();
+            this.planes = await PlanApiClient.GetAllAsync();
             foreach (Plan plan in this.planes)
             {
                 this.planesComboBox.Items.Add(plan.Descripcion);

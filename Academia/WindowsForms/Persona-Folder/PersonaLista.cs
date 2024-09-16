@@ -17,8 +17,7 @@ namespace WindowsForms
 
             id = this.SelectedItem().Id;
 
-            ApiClient<Persona> client = new ApiClient<Persona>("personas");
-            await client.DeleteAsync(id);
+            await PersonaApiClient.DeleteAsync(id);
 
             this.GetAllAndLoad();
         }
@@ -31,8 +30,7 @@ namespace WindowsForms
 
             id = this.SelectedItem().Id;
 
-            ApiClient<Persona> client = new ApiClient<Persona>("personas");
-            Persona persona = await client.GetAsync(id);
+            Persona persona = await PersonaApiClient.GetAsync(id);
 
             personaDetalle.EditMode = true;
             personaDetalle.Persona = persona;
@@ -57,9 +55,9 @@ namespace WindowsForms
 
         private async void GetAllAndLoad()
         {
-            ApiClient<Persona> client = new ApiClient<Persona>("personas");
+            PersonaApiClient client = new PersonaApiClient();
             this.personasDataGridView.DataSource = null;
-            this.personasDataGridView.DataSource = await client.GetAllAsync();
+            this.personasDataGridView.DataSource = await PersonaApiClient.GetAllAsync();
 
             if (this.personasDataGridView.Rows.Count > 0)
             {

@@ -1,5 +1,4 @@
 ﻿using Domain.Models;
-using WindowsForms.Shared;
 
 
 namespace WindowsForms
@@ -17,8 +16,7 @@ namespace WindowsForms
 
             id = this.SelectedItem().Id;
 
-            ApiClient<Plan> client = new ApiClient<Plan>("planes");
-            await client.DeleteAsync(id);
+            await PlanApiClient.DeleteAsync(id);
 
             this.GetAllAndLoad();
         }
@@ -31,8 +29,7 @@ namespace WindowsForms
 
             id = this.SelectedItem().Id;
 
-            ApiClient<Plan> client = new ApiClient<Plan>("planes");
-            Plan plan = await client.GetAsync(id);
+            Plan plan = await PlanApiClient.GetAsync(id);
 
             planDetalle.EditMode = true;
             planDetalle.Plan = plan;
@@ -57,10 +54,10 @@ namespace WindowsForms
 
         private async void GetAllAndLoad()
         {
-            ApiClient<Plan> client = new ApiClient<Plan>("planes");
+            PlanApiClient client = new PlanApiClient();
 
             this.planesDataGridView.DataSource = null;
-            this.planesDataGridView.DataSource = await client.GetAllAsync();
+            this.planesDataGridView.DataSource = await PlanApiClient.GetAllAsync();
 
             if (this.planesDataGridView.Rows.Count > 0)
             {

@@ -36,7 +36,7 @@ namespace WindowsForms
 
         private async void aceptarButton_Click(object sender, EventArgs e)
         {
-            ApiClient<Plan> client = new ApiClient<Plan>("planes");
+            PlanApiClient client = new PlanApiClient();
 
             if (this.ValidatePlan())
             {
@@ -44,11 +44,11 @@ namespace WindowsForms
 
                 if (this.EditMode)
                 {
-                    await client.UpdateAsync(this.Plan);
+                    await PlanApiClient.UpdateAsync(this.Plan);
                 }
                 else
                 {
-                    await client.AddAsync(this.Plan);
+                    await PlanApiClient.AddAsync(this.Plan);
                 }
 
                 this.Close();
