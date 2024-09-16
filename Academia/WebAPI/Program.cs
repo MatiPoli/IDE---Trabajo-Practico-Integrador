@@ -24,45 +24,45 @@ app.UseHttpsRedirection();
 // Personas
 app.MapGet("/personas/{id}", (int id) =>
 {
-    PersonaService personaService = new PersonaService();
+    PersonaService service = new PersonaService();
 
-    return personaService.Get(id);
+    return service.Get(id);
 })
 .WithName("GetPersona")
 .WithOpenApi();
 
 app.MapGet("/personas", () =>
 {
-    PersonaService personaService = new PersonaService();
+    PersonaService service = new PersonaService();
 
-    return personaService.GetAll();
+    return service.GetAll();
 })
 .WithName("GetAllPersonas")
 .WithOpenApi();
 
 app.MapPost("/personas", (Persona persona) =>
 {
-    PersonaService personaService = new PersonaService();
+    PersonaService service = new PersonaService();
 
-    personaService.Add(persona);
+    service.Add(persona);
 })
 .WithName("AddPersona")
 .WithOpenApi();
 
 app.MapPut("/personas", (Persona persona) =>
 {
-    PersonaService personaService = new PersonaService();
+    PersonaService service = new PersonaService();
 
-    personaService.Update(persona);
+    service.Update(persona);
 })
 .WithName("UpdatePersona")
 .WithOpenApi();
 
 app.MapDelete("/personas/{id}", (int id) =>
 {
-    PersonaService personaService = new PersonaService();
+    PersonaService service = new PersonaService();
 
-    personaService.Delete(id);
+    service.Delete(id);
 })
 .WithName("DeletePersona")
 .WithOpenApi();
@@ -70,47 +70,93 @@ app.MapDelete("/personas/{id}", (int id) =>
 //Planes
 app.MapGet("/planes/{id}", (int id) =>
 {
-    PlanService planService = new PlanService();
+    PlanService service = new PlanService();
 
-    return planService.Get(id);
+    return service.Get(id);
 })
 .WithName("GetPlan")
 .WithOpenApi();
 
 app.MapGet("/planes", () =>
 {
-    PlanService planService = new PlanService();
+    PlanService service = new PlanService();
 
-    return planService.GetAll();
+    return service.GetAll();
 })
 .WithName("GetAllPlanes")
 .WithOpenApi();
 
 app.MapPost("/planes", (Plan plan) =>
 {
-    PlanService planService = new PlanService();
+    PlanService service = new PlanService();
 
-    planService.Add(plan);
+    service.Add(plan);
 })
 .WithName("AddPlan")
 .WithOpenApi();
 
 app.MapPut("/planes", (Plan plan) =>
 {
-    PlanService planService = new PlanService();
+    PlanService service = new PlanService();
 
-    planService.Update(plan);
+    service.Update(plan);
 })
 .WithName("UpdatePlan")
 .WithOpenApi();
 
 app.MapDelete("/planes/{id}", (int id) =>
 {
-    PlanService planService = new PlanService();
+    PlanService service = new PlanService();
 
-    planService.Delete(id);
+    service.Delete(id);
 })
 .WithName("DeletePlan")
+.WithOpenApi();
+
+//Especialidades
+app.MapGet("/especialidades/{id}", (int id) =>
+{
+    EspecialidadService service = new EspecialidadService();
+
+    return service.Get(id);
+})
+.WithName("GetEspecialidad")
+.WithOpenApi();
+
+app.MapGet("/especialidades", () =>
+{
+    EspecialidadService service = new EspecialidadService();
+
+    return service.GetAll();
+})
+.WithName("GetAllEspecialidades")
+.WithOpenApi();
+
+app.MapPost("/especialidades", (Plan plan) =>
+{
+    EspecialidadService service = new EspecialidadService();
+
+    service.Add(plan);
+})
+.WithName("AddPlan")
+.WithOpenApi();
+
+app.MapPut("/especialidades", (Plan plan) =>
+{
+    EspecialidadService service = new EspecialidadService();
+
+    service.Update(plan);
+})
+.WithName("UpdateEspecialidad")
+.WithOpenApi();
+
+app.MapDelete("/especialidades/{id}", (int id) =>
+{
+    EspecialidadService service = new EspecialidadService();
+
+    service.Delete(id);
+})
+.WithName("DeleteEspecialidad")
 .WithOpenApi();
 //app.MapGet("/", () => "Hello World!");
 

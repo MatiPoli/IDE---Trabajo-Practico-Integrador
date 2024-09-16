@@ -1,7 +1,6 @@
 ﻿using Domain.Models;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
-using WindowsForms.Shared;
 
 namespace WindowsForms
 {
@@ -10,29 +9,29 @@ namespace WindowsForms
         private static HttpClient client = new HttpClient();
         public static async Task<Persona> GetAsync(int id)
         {
-            Persona persona = null;
+            Persona entity = null;
             HttpResponseMessage response = await client.GetAsync("personas/" + id);
             if (response.IsSuccessStatusCode)
             {
-                persona = await response.Content.ReadAsAsync<Persona>();
+                entity = await response.Content.ReadAsAsync<Persona>();
             }
-            return persona;
+            return entity;
         }
 
         public static async Task<IEnumerable<Persona>> GetAllAsync()
         {
-            IEnumerable<Persona> personas = null;
+            IEnumerable<Persona> entities = null;
             HttpResponseMessage response = await client.GetAsync("personas");
             if (response.IsSuccessStatusCode)
             {
-                personas = await response.Content.ReadAsAsync<IEnumerable<Persona>>();
+                entities = await response.Content.ReadAsAsync<IEnumerable<Persona>>();
             }
-            return personas;
+            return entities;
         }
 
-        public static async Task AddAsync(Persona persona)
+        public static async Task AddAsync(Persona entity)
         {
-            HttpResponseMessage response = await client.PostAsJsonAsync("personas", persona);
+            HttpResponseMessage response = await client.PostAsJsonAsync("personas", entity);
             response.EnsureSuccessStatusCode();
         }
 
@@ -42,9 +41,11 @@ namespace WindowsForms
             response.EnsureSuccessStatusCode();
         }
 
-        public static async Task UpdateAsync(Persona persona)
+        public static async Task UpdateAsync(Persona entity)
         {
-            HttpResponseMessage response = await client.PutAsJsonAsync("personas", persona);
+            HttpResponseMessage response = await client.PutAsJsonAsync("personas", entity);
             response.EnsureSuccessStatusCode();
         }
+
     }
+}

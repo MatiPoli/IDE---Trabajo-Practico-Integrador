@@ -2,7 +2,6 @@
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Numerics;
-using WindowsForms.Shared;
 
 namespace WindowsForms
 {
