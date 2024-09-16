@@ -1,5 +1,6 @@
 ﻿using Domain.Models;
 using System.Globalization;
+using WindowsForms.Shared;
 
 namespace WindowsForms
 {
@@ -51,7 +52,7 @@ namespace WindowsForms
 
         private async void aceptarButton_Click(object sender, EventArgs e)
         {
-            PersonaApiClient client = new PersonaApiClient();
+            ApiClient<Persona> client = new ApiClient<Persona>("personas");
 
             if (this.ValidatePersona())
             {
@@ -66,11 +67,11 @@ namespace WindowsForms
 
                 if (this.EditMode)
                 {
-                    await PersonaApiClient.UpdateAsync(this.Persona);
+                    await client.UpdateAsync(this.Persona);
                 }
                 else
                 {
-                    await PersonaApiClient.AddAsync(this.Persona);
+                    await client.AddAsync(this.Persona);
                 }
 
                 this.Close();
@@ -142,9 +143,9 @@ namespace WindowsForms
 
         private async void PersonaDetalle_Load(object sender, EventArgs e)
         {
-            PlanApiClient planApiClient = new PlanApiClient();
+            ApiClient<Plan> clientPlan = new ApiClient<Plan>("planes");
 
-            this.planes = await PlanApiClient.GetAllAsync();
+            this.planes = await clientPlan.GetAllAsync();
             foreach (Plan plan in this.planes)
             {
                 this.planesComboBox.Items.Add(plan.Descripcion);

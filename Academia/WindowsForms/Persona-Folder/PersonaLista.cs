@@ -1,4 +1,5 @@
 using Domain.Models;
+using WindowsForms.Shared;
 
 namespace WindowsForms
 {
@@ -15,7 +16,9 @@ namespace WindowsForms
             int id;
 
             id = this.SelectedItem().Id;
-            await PersonaApiClient.DeleteAsync(id);
+
+            ApiClient<Persona> client = new ApiClient<Persona>("personas");
+            await client.DeleteAsync(id);
 
             this.GetAllAndLoad();
         }
@@ -28,7 +31,8 @@ namespace WindowsForms
 
             id = this.SelectedItem().Id;
 
-            Persona persona = await PersonaApiClient.GetAsync(id);
+            ApiClient<Persona> client = new ApiClient<Persona>("personas");
+            Persona persona = await client.GetAsync(id);
 
             personaDetalle.EditMode = true;
             personaDetalle.Persona = persona;
@@ -53,10 +57,9 @@ namespace WindowsForms
 
         private async void GetAllAndLoad()
         {
-            PersonaApiClient client = new PersonaApiClient();
-
+            ApiClient<Persona> client = new ApiClient<Persona>("personas");
             this.personasDataGridView.DataSource = null;
-            this.personasDataGridView.DataSource = await PersonaApiClient.GetAllAsync();
+            this.personasDataGridView.DataSource = await client.GetAllAsync();
 
             if (this.personasDataGridView.Rows.Count > 0)
             {

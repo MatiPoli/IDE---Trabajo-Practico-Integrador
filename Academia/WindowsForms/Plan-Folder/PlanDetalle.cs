@@ -1,5 +1,6 @@
 ﻿using Domain.Models;
 using System.Windows.Forms;
+using WindowsForms.Shared;
 
 
 namespace WindowsForms
@@ -35,7 +36,7 @@ namespace WindowsForms
 
         private async void aceptarButton_Click(object sender, EventArgs e)
         {
-            PlanApiClient client = new PlanApiClient();
+            ApiClient<Plan> client = new ApiClient<Plan>("planes");
 
             if (this.ValidatePlan())
             {
@@ -43,11 +44,11 @@ namespace WindowsForms
 
                 if (this.EditMode)
                 {
-                    await PlanApiClient.UpdateAsync(this.Plan);
+                    await client.UpdateAsync(this.Plan);
                 }
                 else
                 {
-                    await PlanApiClient.AddAsync(this.Plan);
+                    await client.AddAsync(this.Plan);
                 }
 
                 this.Close();
