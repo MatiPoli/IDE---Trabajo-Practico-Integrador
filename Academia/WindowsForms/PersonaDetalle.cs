@@ -6,6 +6,7 @@ namespace WindowsForms
     public partial class PersonaDetalle : Form
     {
         private Persona persona;
+        private IEnumerable<Plan> planes;
 
         public Persona Persona
         {
@@ -24,28 +25,33 @@ namespace WindowsForms
 
         public void SetPersona()
         {
-
-            this.nombreTextBox.Text = this.persona.Nombre;
-            this.apellidoTextBox.Text = this.persona.Apellido;
-            this.direccionTextBox.Text = this.persona.Direccion;
-            this.emailTextBox.Text = this.persona.Email;
-            this.telefonoTextBox.Text = this.persona.Telefono;
-            this.legajoTextBox.Text = this.persona.Legajo;
-
-            if (DateTime.TryParse(this.persona.Fecha_Nac, out DateTime fechaNac))
+            if(this.EditMode)
             {
-                this.fechaNacDateTimePicker.Value = fechaNac;
+                this.nombreTextBox.Text = this.persona.Nombre;
+                this.apellidoTextBox.Text = this.persona.Apellido;
+                this.direccionTextBox.Text = this.persona.Direccion;
+                this.emailTextBox.Text = this.persona.Email;
+                this.telefonoTextBox.Text = this.persona.Telefono;
+                this.legajoTextBox.Text = this.persona.Legajo;
+                this.planesComboBox.Text = this.persona.Plan.Descripcion;
+
+
+                if (DateTime.TryParse(this.persona.Fecha_Nac, out DateTime fechaNac))
+                {
+                    this.fechaNacDateTimePicker.Value = fechaNac;
+                }
             }
+
         }
 
         private void cancelarButton_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-        
+
         private async void aceptarButton_Click(object sender, EventArgs e)
         {
-            ApiClient client = new ApiClient();
+            PersonaApiClient client = new PersonaApiClient();
 
             if (this.ValidatePersona())
             {
@@ -56,14 +62,15 @@ namespace WindowsForms
                 this.Persona.Telefono = this.telefonoTextBox.Text;
                 this.Persona.Legajo = this.legajoTextBox.Text;
                 this.Persona.Fecha_Nac = this.fechaNacDateTimePicker.Value.ToString("yyyy-MM-dd");
+                this.Persona.Plan = this.planes.ElementAt(planesComboBox.SelectedIndex);
 
                 if (this.EditMode)
                 {
-                    await ApiClient.UpdateAsync(this.Persona);
+                    await PersonaApiClient.UpdateAsync(this.Persona);
                 }
                 else
                 {
-                    await ApiClient.AddAsync(this.Persona);
+                    await PersonaApiClient.AddAsync(this.Persona);
                 }
 
                 this.Close();
@@ -81,28 +88,30 @@ namespace WindowsForms
             errorProvider.SetError(telefonoTextBox, string.Empty);
             errorProvider.SetError(legajoTextBox, string.Empty);
             errorProvider.SetError(fechaNacDateTimePicker, string.Empty);
+            errorProvider.SetError(planesComboBox, string.Empty);
+
 
             if (this.nombreTextBox.Text == string.Empty)
             {
                 isValid = false;
                 errorProvider.SetError(nombreTextBox, "El Nombre es Requerido");
             }
-            if(this.apellidoTextBox.Text == string.Empty)
+            if (this.apellidoTextBox.Text == string.Empty)
             {
                 isValid = false;
                 errorProvider.SetError(apellidoTextBox, "El Apellido es Requerido");
             }
-            if(this.direccionTextBox.Text == string.Empty)
+            if (this.direccionTextBox.Text == string.Empty)
             {
                 isValid = false;
                 errorProvider.SetError(direccionTextBox, "La Dirección es Requerida");
             }
-            if(this.emailTextBox.Text == string.Empty)
+            if (this.emailTextBox.Text == string.Empty)
             {
                 isValid = false;
                 errorProvider.SetError(emailTextBox, "El Email es Requerido");
             }
-            if(this.telefonoTextBox.Text == string.Empty)
+            if (this.telefonoTextBox.Text == string.Empty)
             {
                 isValid = false;
                 errorProvider.SetError(telefonoTextBox, "El Teléfono es Requerido");
@@ -117,13 +126,29 @@ namespace WindowsForms
                 isValid = false;
                 errorProvider.SetError(legajoTextBox, "El Legajo es Requerido");
             }
-            if(this.fechaNacDateTimePicker.Value == null)
+            if (this.fechaNacDateTimePicker.Value == null)
             {
                 isValid = false;
                 errorProvider.SetError(fechaNacDateTimePicker, "La Fecha de Nacimiento es Requerida");
             }
+            if (this.planesComboBox.Text == string.Empty)
+            {
+                isValid = false;
+                errorProvider.SetError(planesComboBox, "El Plan es Requerido");
+            }
 
             return isValid;
+        }
+
+        private async void PersonaDetalle_Load(object sender, EventArgs e)
+        {
+            PlanApiClient planApiClient = new PlanApiClient();
+
+            this.planes = await PlanApiClient.GetAllAsync();
+            foreach (Plan plan in this.planes)
+            {
+                this.planesComboBox.Items.Add(plan.Descripcion);
+            }
         }
     }
 }

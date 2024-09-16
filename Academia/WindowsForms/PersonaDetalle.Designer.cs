@@ -46,6 +46,8 @@
             legajoTextBox = new TextBox();
             fechaNacDateTimePicker = new DateTimePicker();
             errorProvider = new ErrorProvider(components);
+            label8 = new Label();
+            planesComboBox = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)errorProvider).BeginInit();
             SuspendLayout();
             // 
@@ -121,7 +123,7 @@
             // 
             // aceptarButton
             // 
-            aceptarButton.Location = new Point(23, 265);
+            aceptarButton.Location = new Point(23, 315);
             aceptarButton.Margin = new Padding(3, 3, 20, 3);
             aceptarButton.Name = "aceptarButton";
             aceptarButton.Size = new Size(75, 23);
@@ -132,7 +134,7 @@
             // 
             // cancelarButton
             // 
-            cancelarButton.Location = new Point(186, 265);
+            cancelarButton.Location = new Point(186, 315);
             cancelarButton.Name = "cancelarButton";
             cancelarButton.Size = new Size(75, 23);
             cancelarButton.TabIndex = 9;
@@ -197,11 +199,31 @@
             // 
             errorProvider.ContainerControl = this;
             // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(23, 265);
+            label8.Margin = new Padding(3, 0, 3, 20);
+            label8.Name = "label8";
+            label8.Size = new Size(30, 15);
+            label8.TabIndex = 10;
+            label8.Text = "Plan";
+            // 
+            // planesComboBox
+            // 
+            planesComboBox.FormattingEnabled = true;
+            planesComboBox.Location = new Point(116, 262);
+            planesComboBox.Name = "planesComboBox";
+            planesComboBox.Size = new Size(145, 23);
+            planesComboBox.TabIndex = 11;
+            // 
             // PersonaDetalle
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(284, 311);
+            ClientSize = new Size(284, 361);
+            Controls.Add(planesComboBox);
+            Controls.Add(label8);
             Controls.Add(fechaNacDateTimePicker);
             Controls.Add(legajoTextBox);
             Controls.Add(telefonoTextBox);
@@ -218,12 +240,13 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            MaximumSize = new Size(300, 350);
-            MinimumSize = new Size(300, 350);
+            MaximumSize = new Size(300, 400);
+            MinimumSize = new Size(300, 400);
             Name = "PersonaDetalle";
             Padding = new Padding(20);
             StartPosition = FormStartPosition.CenterParent;
             Text = "Persona";
+            Load += PersonaDetalle_Load;
             ((System.ComponentModel.ISupportInitialize)errorProvider).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -248,5 +271,7 @@
         private TextBox legajoTextBox;
         private DateTimePicker fechaNacDateTimePicker;
         private ErrorProvider errorProvider;
+        private ComboBox planesComboBox;
+        private Label label8;
     }
 }

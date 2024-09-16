@@ -4,11 +4,11 @@ using System.Net.Http.Json;
 
 namespace WindowsForms
 {
-    public class ApiClient
+    public class PersonaApiClient
     {
         private static HttpClient client = new HttpClient();
 
-        static ApiClient()
+        static PersonaApiClient()
         {
             client.BaseAddress = new Uri("https://localhost:7028/");
             client.DefaultRequestHeaders.Accept.Clear();

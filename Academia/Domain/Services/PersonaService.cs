@@ -9,6 +9,7 @@ namespace Domain.Services
         {
             using var context = new AcademiaContext();
 
+            context.Attach(persona.Plan);
             context.Personas.Add(persona);
             context.SaveChanges();
         }

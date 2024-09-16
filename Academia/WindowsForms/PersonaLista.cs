@@ -15,7 +15,7 @@ namespace WindowsForms
             int id;
 
             id = this.SelectedItem().Id;
-            await ApiClient.DeleteAsync(id);
+            await PersonaApiClient.DeleteAsync(id);
 
             this.GetAllAndLoad();
         }
@@ -28,7 +28,7 @@ namespace WindowsForms
 
             id = this.SelectedItem().Id;
 
-            Persona persona = await ApiClient.GetAsync(id);
+            Persona persona = await PersonaApiClient.GetAsync(id);
 
             personaDetalle.EditMode = true;
             personaDetalle.Persona = persona;
@@ -53,11 +53,11 @@ namespace WindowsForms
 
         private async void GetAllAndLoad()
         {
-            ApiClient client = new ApiClient();
+            PersonaApiClient client = new PersonaApiClient();
 
             this.personasDataGridView.DataSource = null;
-            this.personasDataGridView.DataSource = await ApiClient.GetAllAsync();
-        
+            this.personasDataGridView.DataSource = await PersonaApiClient.GetAllAsync();
+
             if (this.personasDataGridView.Rows.Count > 0)
             {
                 this.personasDataGridView.Rows[0].Selected = true;
@@ -71,13 +71,18 @@ namespace WindowsForms
             }
         }
 
-        private Persona SelectedItem() 
+        private Persona SelectedItem()
         {
             Persona persona;
 
             persona = (Persona)personasDataGridView.SelectedRows[0].DataBoundItem;
-            
+
             return persona;
+        }
+
+        private void PersonaLista_Load(object sender, EventArgs e)
+        {
+            this.GetAllAndLoad();
         }
     }
 }

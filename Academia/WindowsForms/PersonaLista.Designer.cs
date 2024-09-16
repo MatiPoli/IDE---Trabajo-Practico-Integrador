@@ -89,10 +89,12 @@
             Controls.Add(modificarButton);
             Controls.Add(agregarButton);
             Controls.Add(personasDataGridView);
+            MaximumSize = new Size(800, 500);
             MinimumSize = new Size(800, 500);
             Name = "PersonaLista";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Listado Personas";
+            Load += PersonaLista_Load;
             ((System.ComponentModel.ISupportInitialize)personasDataGridView).EndInit();
             ResumeLayout(false);
         }

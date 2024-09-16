@@ -8,6 +8,7 @@ namespace Domain.Context
     internal class AcademiaContext : DbContext
     {
         internal DbSet<Persona> Personas { get; set; }
+        internal DbSet<Plan> Planes { get; set; }
 
         internal AcademiaContext()
         {
@@ -20,7 +21,14 @@ namespace Domain.Context
             optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Initial Catalog=Academia;Integrated Security=true");
             optionsBuilder.LogTo(Console.WriteLine, LogLevel.Information);
         }
-        
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Persona>()
+                .HasOne(p => p.Plan)
+                .WithMany();
+        }
+
     }
 
 }
