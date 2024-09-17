@@ -30,6 +30,7 @@
         {
             personasButton = new Button();
             planesButton = new Button();
+            especialidadesButton = new Button();
             SuspendLayout();
             // 
             // personasButton
@@ -52,11 +53,22 @@
             planesButton.UseVisualStyleBackColor = true;
             planesButton.Click += planesButton_Click;
             // 
+            // especialidadesButton
+            // 
+            especialidadesButton.Location = new Point(39, 111);
+            especialidadesButton.Name = "especialidadesButton";
+            especialidadesButton.Size = new Size(138, 23);
+            especialidadesButton.TabIndex = 2;
+            especialidadesButton.Text = "Listado Especialidades";
+            especialidadesButton.UseVisualStyleBackColor = true;
+            especialidadesButton.Click += especialidadesButton_Click;
+            // 
             // MenuPrincipal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(215, 261);
+            Controls.Add(especialidadesButton);
             Controls.Add(planesButton);
             Controls.Add(personasButton);
             Name = "MenuPrincipal";
@@ -70,5 +82,6 @@
 
         private Button personasButton;
         private Button planesButton;
+        private Button especialidadesButton;
     }
 }

@@ -1,6 +1,4 @@
 using Domain.Models;
-using WindowsForms.Shared;
-
 namespace WindowsForms
 {
     public partial class PersonaLista : Form

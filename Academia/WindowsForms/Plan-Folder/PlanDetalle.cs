@@ -1,6 +1,6 @@
 ﻿using Domain.Models;
 using System.Windows.Forms;
-using WindowsForms.Shared;
+using WindowsForms.Especialidad_Folder;
 
 
 namespace WindowsForms
@@ -8,6 +8,7 @@ namespace WindowsForms
     public partial class PlanDetalle : Form
     {
         private Plan plan;
+        private IEnumerable<Especialidad> especialidades;
 
         public Plan Plan
         {
@@ -26,7 +27,11 @@ namespace WindowsForms
 
         public void SetPlan()
         {
-            this.descripcionTextBox.Text = this.plan.Descripcion;
+            if(this.EditMode)
+            {
+                this.descripcionTextBox.Text = this.plan.Descripcion;
+                this.especialidadesComboBox.Text = this.plan.Especialidad.Descripcion;
+            }
         }
 
         private void cancelarButton_Click(object sender, EventArgs e)
@@ -41,6 +46,7 @@ namespace WindowsForms
             if (this.ValidatePlan())
             {
                 this.plan.Descripcion = this.descripcionTextBox.Text;
+                this.plan.Especialidad = this.especialidades.ElementAt(especialidadesComboBox.SelectedIndex);
 
                 if (this.EditMode)
                 {
@@ -60,15 +66,32 @@ namespace WindowsForms
             bool isValid = true;
 
             errorProvider.SetError(descripcionTextBox, string.Empty);
-    
+            errorProvider.SetError(especialidadesComboBox, string.Empty);
+
 
             if (this.descripcionTextBox.Text == string.Empty)
             {
                 isValid = false;
                 errorProvider.SetError(descripcionTextBox, "La Descripcíón es Requerida");
-            }  
+            }
+            if (this.especialidadesComboBox.Text == string.Empty)
+            {
+                isValid = false;
+                errorProvider.SetError(especialidadesComboBox, "La Especialidad es Requerida");
+            }
 
             return isValid;
+        }
+
+        private async void PlanDetalle_Load(object sender, EventArgs e)
+        {
+            EspecialidadApiClient clientEspecialidad = new EspecialidadApiClient();
+
+            this.especialidades = await EspecialidadApiClient.GetAllAsync();
+            foreach (Especialidad especialidad in this.especialidades)
+            {
+                this.especialidadesComboBox.Items.Add(especialidad.Descripcion);
+            }
         }
     }
 }

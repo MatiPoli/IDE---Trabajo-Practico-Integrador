@@ -34,7 +34,7 @@
             cancelarButton = new Button();
             aceptarButton = new Button();
             label2 = new Label();
-            comboBox1 = new ComboBox();
+            especialidadesComboBox = new ComboBox();
             errorProvider = new ErrorProvider(components);
             ((System.ComponentModel.ISupportInitialize)errorProvider).BeginInit();
             SuspendLayout();
@@ -89,13 +89,13 @@
             label2.TabIndex = 12;
             label2.Text = "Especialidades";
             // 
-            // comboBox1
+            // especialidadesComboBox
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(116, 58);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(145, 23);
-            comboBox1.TabIndex = 2;
+            especialidadesComboBox.FormattingEnabled = true;
+            especialidadesComboBox.Location = new Point(116, 58);
+            especialidadesComboBox.Name = "especialidadesComboBox";
+            especialidadesComboBox.Size = new Size(145, 23);
+            especialidadesComboBox.TabIndex = 2;
             // 
             // errorProvider
             // 
@@ -106,7 +106,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(284, 143);
-            Controls.Add(comboBox1);
+            Controls.Add(especialidadesComboBox);
             Controls.Add(label2);
             Controls.Add(cancelarButton);
             Controls.Add(aceptarButton);
@@ -116,6 +116,7 @@
             Padding = new Padding(20);
             StartPosition = FormStartPosition.CenterParent;
             Text = "PlanDetalle";
+            Load += PlanDetalle_Load;
             ((System.ComponentModel.ISupportInitialize)errorProvider).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -128,7 +129,7 @@
         private Button cancelarButton;
         private Button aceptarButton;
         private Label label2;
-        private ComboBox comboBox1;
+        private ComboBox especialidadesComboBox;
         private ErrorProvider errorProvider;
     }
 }

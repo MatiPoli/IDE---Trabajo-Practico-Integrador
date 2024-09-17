@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindowsForms.Especialidad_Folder;
 
 namespace WindowsForms
 {
@@ -27,6 +28,12 @@ namespace WindowsForms
         {
             PlanLista planLista = new PlanLista();
             planLista.ShowDialog();
+        }
+
+        private void especialidadesButton_Click(object sender, EventArgs e)
+        {
+            EspecialidadLista especialidadLista = new EspecialidadLista();
+            especialidadLista.ShowDialog();
         }
     }
 }

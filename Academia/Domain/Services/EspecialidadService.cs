@@ -24,7 +24,7 @@ namespace Domain.Services
                 context.SaveChanges();
             }
         }
-        public EspecialidadService? Get(int id)
+        public Especialidad? Get(int id)
         {
             using var context = new AcademiaContext();
 
@@ -42,7 +42,7 @@ namespace Domain.Services
         {
             using var context = new AcademiaContext();
 
-            Especialidad? especialidadToUpdate = context.Especialidad.Find(especialidad.Id);
+            Especialidad? especialidadToUpdate = context.Especialidades.Find(especialidad.Id);
 
             if (especialidadToUpdate != null)
             {
@@ -51,4 +51,5 @@ namespace Domain.Services
                 context.SaveChanges();
             }
         }
+    }
 }

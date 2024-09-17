@@ -40,20 +40,20 @@ app.MapGet("/personas", () =>
 .WithName("GetAllPersonas")
 .WithOpenApi();
 
-app.MapPost("/personas", (Persona persona) =>
+app.MapPost("/personas", (Persona entity) =>
 {
     PersonaService service = new PersonaService();
 
-    service.Add(persona);
+    service.Add(entity);
 })
 .WithName("AddPersona")
 .WithOpenApi();
 
-app.MapPut("/personas", (Persona persona) =>
+app.MapPut("/personas", (Persona entity) =>
 {
     PersonaService service = new PersonaService();
 
-    service.Update(persona);
+    service.Update(entity);
 })
 .WithName("UpdatePersona")
 .WithOpenApi();
@@ -86,20 +86,20 @@ app.MapGet("/planes", () =>
 .WithName("GetAllPlanes")
 .WithOpenApi();
 
-app.MapPost("/planes", (Plan plan) =>
+app.MapPost("/planes", (Plan entity) =>
 {
     PlanService service = new PlanService();
 
-    service.Add(plan);
+    service.Add(entity);
 })
 .WithName("AddPlan")
 .WithOpenApi();
 
-app.MapPut("/planes", (Plan plan) =>
+app.MapPut("/planes", (Plan entity) =>
 {
     PlanService service = new PlanService();
 
-    service.Update(plan);
+    service.Update(entity);
 })
 .WithName("UpdatePlan")
 .WithOpenApi();
@@ -132,20 +132,20 @@ app.MapGet("/especialidades", () =>
 .WithName("GetAllEspecialidades")
 .WithOpenApi();
 
-app.MapPost("/especialidades", (Plan plan) =>
+app.MapPost("/especialidades", (Especialidad entity) =>
 {
     EspecialidadService service = new EspecialidadService();
 
-    service.Add(plan);
+    service.Add(entity);
 })
-.WithName("AddPlan")
+.WithName("AddEspecialidad")
 .WithOpenApi();
 
-app.MapPut("/especialidades", (Plan plan) =>
+app.MapPut("/especialidades", (Especialidad entity) =>
 {
     EspecialidadService service = new EspecialidadService();
 
-    service.Update(plan);
+    service.Update(entity);
 })
 .WithName("UpdateEspecialidad")
 .WithOpenApi();

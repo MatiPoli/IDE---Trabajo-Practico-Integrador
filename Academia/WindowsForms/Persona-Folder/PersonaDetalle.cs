@@ -1,6 +1,5 @@
 ﻿using Domain.Models;
 using System.Globalization;
-using WindowsForms.Shared;
 
 namespace WindowsForms
 {
