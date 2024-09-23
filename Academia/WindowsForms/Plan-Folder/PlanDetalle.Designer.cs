@@ -116,7 +116,6 @@
             Padding = new Padding(20);
             StartPosition = FormStartPosition.CenterParent;
             Text = "PlanDetalle";
-            Load += PlanDetalle_Load;
             ((System.ComponentModel.ISupportInitialize)errorProvider).EndInit();
             ResumeLayout(false);
             PerformLayout();

@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,6 +12,15 @@ namespace WindowsForms.Especialidad_Folder
     public class EspecialidadApiClient
     {
         private static HttpClient client = new HttpClient();
+
+        static EspecialidadApiClient()
+        {
+            client.BaseAddress = new Uri("http://localhost:5003/");
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+        }
+
         public static async Task<Especialidad> GetAsync(int id)
         {
             Especialidad entity = null;
@@ -46,7 +57,7 @@ namespace WindowsForms.Especialidad_Folder
 
         public static async Task UpdateAsync(Especialidad entity)
         {
-            HttpResponseMessage response = await client.PutAsJsonAsync("personas", entity);
+            HttpResponseMessage response = await client.PutAsJsonAsync("especialidades", entity);
             response.EnsureSuccessStatusCode();
         }
     }

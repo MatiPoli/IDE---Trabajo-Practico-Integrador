@@ -8,6 +8,13 @@ namespace WindowsForms
     public class PlanApiClient
     {
         private static HttpClient client = new HttpClient();
+        static PlanApiClient()
+        {
+            client.BaseAddress = new Uri("http://localhost:5003/");
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+        }
         public static async Task<Plan> GetAsync(int id)
         {
             Plan entity = null;

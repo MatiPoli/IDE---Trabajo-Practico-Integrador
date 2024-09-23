@@ -1,5 +1,6 @@
 ﻿using Domain.Models;
 using Domain.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace Domain.Services
 {
@@ -31,14 +32,20 @@ namespace Domain.Services
         {
             using var context = new AcademiaContext();
 
-            return context.Personas.Find(id);
+            return context.Personas
+                .Include(p => p.Plan)
+                    .ThenInclude(plan => plan.Especialidad)
+                .FirstOrDefault(p => p.Id == id);
         }
 
         public IEnumerable<Persona> GetAll()
         {
             using var context = new AcademiaContext();
 
-            return context.Personas.ToList();
+            return context.Personas
+                .Include(p => p.Plan)
+                    .ThenInclude(plan => plan.Especialidad)
+                .ToList();
         }
 
         public void Update(Persona persona)
@@ -56,6 +63,7 @@ namespace Domain.Services
                 personaToUpdate.Telefono = persona.Telefono;
                 personaToUpdate.Fecha_Nac = persona.Fecha_Nac;
                 personaToUpdate.Legajo = persona.Legajo;
+                personaToUpdate.Plan = persona.Plan;
 
                 context.SaveChanges();
             }

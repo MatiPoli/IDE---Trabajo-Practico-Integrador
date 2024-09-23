@@ -246,7 +246,6 @@
             Padding = new Padding(20);
             StartPosition = FormStartPosition.CenterParent;
             Text = "Persona";
-            Load += PersonaDetalle_Load;
             ((System.ComponentModel.ISupportInitialize)errorProvider).EndInit();
             ResumeLayout(false);
             PerformLayout();

@@ -28,6 +28,10 @@ namespace Domain.Context
             modelBuilder.Entity<Persona>()
                 .HasOne(p => p.Plan)
                 .WithMany();
+
+            modelBuilder.Entity<Plan>()
+                .HasOne(p => p.Especialidad)
+                .WithMany();
         }
 
     }

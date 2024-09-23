@@ -7,6 +7,14 @@ namespace WindowsForms
     public class PersonaApiClient
     {
         private static HttpClient client = new HttpClient();
+        static PersonaApiClient()
+        {
+            client.BaseAddress = new Uri("http://localhost:5003/");
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+        }
+
         public static async Task<Persona> GetAsync(int id)
         {
             Persona entity = null;

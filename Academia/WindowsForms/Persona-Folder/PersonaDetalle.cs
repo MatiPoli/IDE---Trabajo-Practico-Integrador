@@ -23,9 +23,17 @@ namespace WindowsForms
             InitializeComponent();
         }
 
-        public void SetPersona()
+        public async void SetPersona()
         {
-            if(this.EditMode)
+            PlanApiClient clientPlan = new PlanApiClient();
+
+            this.planes = await PlanApiClient.GetAllAsync();
+            foreach (Plan plan in this.planes)
+            {
+                this.planesComboBox.Items.Add(plan.Descripcion);
+            }
+
+            if (this.EditMode)
             {
                 this.nombreTextBox.Text = this.persona.Nombre;
                 this.apellidoTextBox.Text = this.persona.Apellido;
@@ -34,6 +42,7 @@ namespace WindowsForms
                 this.telefonoTextBox.Text = this.persona.Telefono;
                 this.legajoTextBox.Text = this.persona.Legajo;
                 this.planesComboBox.Text = this.persona.Plan.Descripcion;
+                this.planesComboBox.SelectedIndex = this.planes.ToList().FindIndex(p => p.Id == this.persona.Plan.Id);
 
 
                 if (DateTime.TryParse(this.persona.Fecha_Nac, out DateTime fechaNac))
@@ -140,15 +149,5 @@ namespace WindowsForms
             return isValid;
         }
 
-        private async void PersonaDetalle_Load(object sender, EventArgs e)
-        {
-            PlanApiClient clientPlan = new PlanApiClient();
-
-            this.planes = await PlanApiClient.GetAllAsync();
-            foreach (Plan plan in this.planes)
-            {
-                this.planesComboBox.Items.Add(plan.Descripcion);
-            }
-        }
     }
 }

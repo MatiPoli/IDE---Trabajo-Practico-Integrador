@@ -25,12 +25,21 @@ namespace WindowsForms
             InitializeComponent();
         }
 
-        public void SetPlan()
+        public async void SetPlan()
         {
-            if(this.EditMode)
+            EspecialidadApiClient clientEspecialidad = new EspecialidadApiClient();
+
+            this.especialidades = await EspecialidadApiClient.GetAllAsync();
+            foreach (Especialidad especialidad in this.especialidades)
+            {
+                this.especialidadesComboBox.Items.Add(especialidad.Descripcion);
+            }
+
+            if (this.EditMode)
             {
                 this.descripcionTextBox.Text = this.plan.Descripcion;
                 this.especialidadesComboBox.Text = this.plan.Especialidad.Descripcion;
+                this.especialidadesComboBox.SelectedIndex = this.especialidades.ToList().FindIndex(e => e.Id == this.plan.Especialidad.Id);
             }
         }
 
@@ -81,17 +90,6 @@ namespace WindowsForms
             }
 
             return isValid;
-        }
-
-        private async void PlanDetalle_Load(object sender, EventArgs e)
-        {
-            EspecialidadApiClient clientEspecialidad = new EspecialidadApiClient();
-
-            this.especialidades = await EspecialidadApiClient.GetAllAsync();
-            foreach (Especialidad especialidad in this.especialidades)
-            {
-                this.especialidadesComboBox.Items.Add(especialidad.Descripcion);
-            }
         }
     }
 }
