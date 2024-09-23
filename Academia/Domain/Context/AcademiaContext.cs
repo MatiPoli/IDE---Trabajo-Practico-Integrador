@@ -10,6 +10,8 @@ namespace Domain.Context
         internal DbSet<Persona> Personas { get; set; }
         internal DbSet<Plan> Planes { get; set; }
         internal DbSet<Especialidad> Especialidades { get; set; }
+        internal DbSet<Materia> Materias { get; set; }
+        internal DbSet<Curso> Cursos { get; set; }
 
         internal DbSet<Comision> Comisiones { get; set; }
 
@@ -24,7 +26,7 @@ namespace Domain.Context
             optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Initial Catalog=Academia;Integrated Security=true");
             optionsBuilder.LogTo(Console.WriteLine, LogLevel.Information);
         }
-
+        /*
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Persona>()
@@ -35,7 +37,7 @@ namespace Domain.Context
                 .HasOne(p => p.Especialidad)
                 .WithMany();
         }
-
+        */
     }
 
 }
