@@ -37,7 +37,7 @@ namespace Domain.Services
                 .Include(c => c.Materia)
                     .ThenInclude(materia => materia.Plan)
                         .ThenInclude(plan => plan.Especialidad)
-                 .Include(c => c.Comision)
+                .Include(c => c.Comision)
                     .ThenInclude(comision => comision.Plan)
                         .ThenInclude(plan => plan.Especialidad)
                 .FirstOrDefault(c => c.Id == id);
