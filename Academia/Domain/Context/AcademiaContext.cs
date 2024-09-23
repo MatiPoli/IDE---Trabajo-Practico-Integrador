@@ -11,6 +11,8 @@ namespace Domain.Context
         internal DbSet<Plan> Planes { get; set; }
         internal DbSet<Especialidad> Especialidades { get; set; }
 
+        internal DbSet<Comision> Comisiones { get; set; }
+
         internal AcademiaContext()
         {
             //this.Database.EnsureDeleted();
