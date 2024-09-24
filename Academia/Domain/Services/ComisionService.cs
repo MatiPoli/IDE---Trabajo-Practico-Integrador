@@ -1,5 +1,6 @@
 using Domain.Models;
 using Domain.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace Domain.Services
 {
@@ -9,6 +10,7 @@ namespace Domain.Services
         {
             using var context = new AcademiaContext();
 
+            context.Attach(comision.Plan);
             context.Comisiones.Add(comision);
             context.SaveChanges();
         }
@@ -28,14 +30,20 @@ namespace Domain.Services
         {
             using var context = new AcademiaContext();
 
-            return context.Comisiones.Find(id);
+            return context.Comisiones
+                .Include(c => c.Plan)
+                    .ThenInclude(plan => plan.Especialidad)
+                .FirstOrDefault(c => c.Id == id);
         }
 
         public IEnumerable<Comision> GetAll()
         {
             using var context = new AcademiaContext();
 
-            return context.Comisiones.ToList();
+            return context.Comisiones
+                .Include(c => c.Plan)
+                    .ThenInclude(plan => plan.Especialidad)
+                .ToList();
         }
 
         public void Update(Comision comision)
@@ -47,7 +55,7 @@ namespace Domain.Services
             if (comisionToUpdate != null)
             {
                 comisionToUpdate.Descripcion = comision.Descripcion;
-                comisionToUpdate.anio = comision.Anio;
+                comisionToUpdate.Anio = comision.Anio;
                 comisionToUpdate.Plan = comision.Plan;
                 context.SaveChanges();
             }

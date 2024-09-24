@@ -12,8 +12,8 @@ namespace Domain.Context
         internal DbSet<Especialidad> Especialidades { get; set; }
         internal DbSet<Materia> Materias { get; set; }
         internal DbSet<Curso> Cursos { get; set; }
-
         internal DbSet<Comision> Comisiones { get; set; }
+        internal DbSet<Inscripcion> Inscripciones { get; set; }
 
         internal AcademiaContext()
         {
