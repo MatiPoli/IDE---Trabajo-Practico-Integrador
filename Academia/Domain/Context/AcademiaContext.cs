@@ -13,7 +13,7 @@ namespace Domain.Context
         internal DbSet<Materia> Materias { get; set; }
         internal DbSet<Curso> Cursos { get; set; }
         internal DbSet<Comision> Comisiones { get; set; }
-        internal DbSet<Docentes_Cursos> Docentes_CursosSet { get; set; }
+        internal DbSet<Docente_Curso> Docentes_Cursos { get; set; }
         internal DbSet<Inscripcion> Inscripciones { get; set; }
 
 
