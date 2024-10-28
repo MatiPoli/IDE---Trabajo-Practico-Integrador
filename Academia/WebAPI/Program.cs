@@ -158,6 +158,237 @@ app.MapDelete("/especialidades/{id}", (int id) =>
 })
 .WithName("DeleteEspecialidad")
 .WithOpenApi();
+
+// Comisiones
+app.MapGet("/comisiones/{id}", (int id) =>
+{
+    ComisionService service = new ComisionService();
+
+    return service.Get(id);
+})
+.WithName("GetComision")
+.WithOpenApi();
+
+app.MapGet("/comisiones", () =>
+{
+    ComisionService service = new ComisionService();
+
+    return service.GetAll();
+})
+.WithName("GetAllComisiones")
+.WithOpenApi();
+
+app.MapPost("/comisiones", (Comision entity) =>
+{
+    ComisionService service = new ComisionService();
+
+    service.Add(entity);
+})
+.WithName("AddComision")
+.WithOpenApi();
+
+app.MapPut("/comisiones", (Comision entity) =>
+{
+    ComisionService service = new ComisionService();
+
+    service.Update(entity);
+})
+.WithName("UpdateComision")
+.WithOpenApi();
+
+app.MapDelete("/comisiones/{id}", (int id) =>
+{
+    ComisionService service = new ComisionService();
+
+    service.Delete(id);
+})
+.WithName("DeleteComision")
+.WithOpenApi();
+
+// Materias
+app.MapGet("/materias/{id}", (int id) =>
+{
+    MateriaService service = new MateriaService();
+
+    return service.Get(id);
+})
+.WithName("GetMateria")
+.WithOpenApi();
+
+app.MapGet("/materias", () =>
+{
+    MateriaService service = new MateriaService();
+
+    return service.GetAll();
+})
+.WithName("GetAllMaterias")
+.WithOpenApi();
+
+app.MapPost("/materias", (Materia entity) =>
+{
+    MateriaService service = new MateriaService();
+
+    service.Add(entity);
+})
+.WithName("AddMateria")
+.WithOpenApi();
+
+app.MapPut("/materias", (Materia entity) =>
+{
+    MateriaService service = new MateriaService();
+
+    service.Update(entity);
+})
+.WithName("UpdateMateria")
+.WithOpenApi();
+
+app.MapDelete("/materias/{id}", (int id) =>
+{
+    MateriaService service = new MateriaService();
+
+    service.Delete(id);
+})
+.WithName("DeleteMateria")
+.WithOpenApi();
+
+// Cursos
+app.MapGet("/cursos/{id}", (int id) =>
+{
+    CursoService service = new CursoService();
+
+    return service.Get(id);
+})
+.WithName("GetCurso")
+.WithOpenApi();
+
+app.MapGet("/cursos", () =>
+{
+    CursoService service = new CursoService();
+
+    return service.GetAll();
+})
+.WithName("GetAllCursos")
+.WithOpenApi();
+
+app.MapPost("/cursos", (Curso entity) =>
+{
+    CursoService service = new CursoService();
+
+    service.Add(entity);
+})
+.WithName("AddCurso")
+.WithOpenApi();
+
+app.MapPut("/cursos", (Curso entity) =>
+{
+    CursoService service = new CursoService();
+
+    service.Update(entity);
+})
+.WithName("UpdateCurso")
+.WithOpenApi();
+
+app.MapDelete("/cursos/{id}", (int id) =>
+{
+    CursoService service = new CursoService();
+
+    service.Delete(id);
+})
+.WithName("DeleteCurso")
+.WithOpenApi();
+
+// Docentes_Cursos
+app.MapGet("/docentes_cursos/{id}", (int id) =>
+{
+    Docentes_CursosService service = new Docentes_CursosService();
+
+    return service.Get(id);
+})
+.WithName("GetDocente_Curso")
+.WithOpenApi();
+
+app.MapGet("/docentes_cursos", () =>
+{
+    Docentes_CursosService service = new Docentes_CursosService();
+
+    return service.GetAll();
+})
+.WithName("GetAllDocentes_Cursos")
+.WithOpenApi();
+
+app.MapPost("/docentes_cursos", (Docente_Curso entity) =>
+{
+    Docentes_CursosService service = new Docentes_CursosService();
+
+    service.Add(entity);
+})
+.WithName("AddDocente_Curso")
+.WithOpenApi();
+
+app.MapPut("/docentes_cursos", (Docente_Curso entity) =>
+{
+    Docentes_CursosService service = new Docentes_CursosService();
+
+    service.Update(entity);
+})
+.WithName("UpdateDocente_Curso")
+.WithOpenApi();
+
+app.MapDelete("/docentes_cursos/{id}", (int id) =>
+{
+    Docentes_CursosService service = new Docentes_CursosService();
+
+    service.Delete(id);
+})
+.WithName("DeleteDocente_Curso")
+.WithOpenApi();
+
+// Inscripciones
+app.MapGet("/inscripciones/{id}", (int id) =>
+{
+    InscripcionService service = new InscripcionService();
+
+    return service.Get(id);
+})
+.WithName("GetInscripcion")
+.WithOpenApi();
+
+app.MapGet("/inscripciones", () =>
+{
+    InscripcionService service = new InscripcionService();
+
+    return service.GetAll();
+})
+.WithName("GetAllInscripciones")
+.WithOpenApi();
+
+app.MapPost("/inscripciones", (Inscripcion entity) =>
+{
+    InscripcionService service = new InscripcionService();
+
+    service.Add(entity);
+})
+.WithName("AddInscripcion")
+.WithOpenApi();
+
+app.MapPut("/inscripciones", (Inscripcion entity) =>
+{
+    InscripcionService service = new InscripcionService();
+
+    service.Update(entity);
+})
+.WithName("UpdateInscripcion")
+.WithOpenApi();
+
+app.MapDelete("/inscripciones/{id}", (int id) =>
+{
+    InscripcionService service = new InscripcionService();
+
+    service.Delete(id);
+})
+.WithName("DeleteInscripcion")
+.WithOpenApi();
+
 //app.MapGet("/", () => "Hello World!");
 
 app.Run();
