@@ -4,10 +4,10 @@ using System.Net.Http.Json;
 
 namespace WindowsForms.DocenteCurso_Folder
 {
-    public class DocenteCursoApiCliente
+    public class DocenteCursoApiClient
     {
         private static HttpClient client = new HttpClient();
-        static DocenteCursoApiCliente()
+        static DocenteCursoApiClient()
         {
             client.BaseAddress = new Uri("http://localhost:5003/");
             client.DefaultRequestHeaders.Accept.Clear();

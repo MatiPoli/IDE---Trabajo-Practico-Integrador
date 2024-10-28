@@ -1,6 +1,5 @@
 ﻿using Domain.Models;
 
-
 namespace WindowsForms
 {
     public partial class PlanLista : Form
