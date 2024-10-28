@@ -16,5 +16,15 @@ namespace WindowsForms.Curso_Folder
         {
             InitializeComponent();
         }
+
+        private void cancelarButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void aceptarButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

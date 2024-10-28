@@ -16,5 +16,10 @@ namespace WindowsForms.Comision_Folder
         {
             InitializeComponent();
         }
+
+        private void aceptarButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

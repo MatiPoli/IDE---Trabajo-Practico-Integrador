@@ -1,5 +1,4 @@
 ﻿using Domain.Models;
-using WindowsForms.Materia_Folder;
 
 namespace WindowsForms.Inscripcion_Folder
 {

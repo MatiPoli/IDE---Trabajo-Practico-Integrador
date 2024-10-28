@@ -16,5 +16,15 @@ namespace WindowsForms.DocenteCurso_Folder
         {
             InitializeComponent();
         }
+
+        private void cursosComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void aceptarButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

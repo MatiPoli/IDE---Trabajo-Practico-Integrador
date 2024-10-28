@@ -16,5 +16,20 @@ namespace WindowsForms.Inscripcion_Folder
         {
             InitializeComponent();
         }
+
+        private void InscripcionDetalle_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void aceptarButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cancelarButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
