@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             comisionesComboBox = new ComboBox();
             label4 = new Label();
             materiasComboBox = new ComboBox();
@@ -38,8 +39,10 @@
             anioCalendarioNumericUpDown = new NumericUpDown();
             cancelarButton = new Button();
             aceptarButton = new Button();
+            errorProvider = new ErrorProvider(components);
             ((System.ComponentModel.ISupportInitialize)cupoNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)anioCalendarioNumericUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider).BeginInit();
             SuspendLayout();
             // 
             // comisionesComboBox
@@ -138,7 +141,11 @@
             aceptarButton.TabIndex = 5;
             aceptarButton.Text = "Aceptar";
             aceptarButton.UseVisualStyleBackColor = true;
-            aceptarButton.Click += this.aceptarButton_Click;
+            aceptarButton.Click += aceptarButton_Click;
+            // 
+            // errorProvider
+            // 
+            errorProvider.ContainerControl = this;
             // 
             // CursoDetalle
             // 
@@ -162,6 +169,7 @@
             Text = "Curso Detalle";
             ((System.ComponentModel.ISupportInitialize)cupoNumericUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)anioCalendarioNumericUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -178,5 +186,6 @@
         private NumericUpDown anioCalendarioNumericUpDown;
         private Button cancelarButton;
         private Button aceptarButton;
+        private ErrorProvider errorProvider;
     }
 }

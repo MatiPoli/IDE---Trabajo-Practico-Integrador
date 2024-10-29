@@ -31,11 +31,11 @@
             components = new System.ComponentModel.Container();
             descripcionTextBox = new TextBox();
             label1 = new Label();
-            cancelarButton = new Button();
-            aceptarButton = new Button();
             label2 = new Label();
             especialidadesComboBox = new ComboBox();
             errorProvider = new ErrorProvider(components);
+            aceptarButton = new Button();
+            cancelarButton = new Button();
             ((System.ComponentModel.ISupportInitialize)errorProvider).BeginInit();
             SuspendLayout();
             // 
@@ -55,29 +55,6 @@
             label1.Size = new Size(69, 15);
             label1.TabIndex = 2;
             label1.Text = "Descripción";
-            // 
-            // cancelarButton
-            // 
-            cancelarButton.Anchor = AnchorStyles.Bottom;
-            cancelarButton.Location = new Point(186, 97);
-            cancelarButton.Name = "cancelarButton";
-            cancelarButton.Size = new Size(75, 23);
-            cancelarButton.TabIndex = 4;
-            cancelarButton.Text = "Cancelar";
-            cancelarButton.UseVisualStyleBackColor = true;
-            cancelarButton.Click += cancelarButton_Click;
-            // 
-            // aceptarButton
-            // 
-            aceptarButton.Anchor = AnchorStyles.Bottom;
-            aceptarButton.Location = new Point(23, 97);
-            aceptarButton.Margin = new Padding(3, 3, 20, 3);
-            aceptarButton.Name = "aceptarButton";
-            aceptarButton.Size = new Size(75, 23);
-            aceptarButton.TabIndex = 3;
-            aceptarButton.Text = "Aceptar";
-            aceptarButton.UseVisualStyleBackColor = true;
-            aceptarButton.Click += aceptarButton_Click;
             // 
             // label2
             // 
@@ -101,6 +78,29 @@
             // 
             errorProvider.ContainerControl = this;
             // 
+            // aceptarButton
+            // 
+            aceptarButton.Anchor = AnchorStyles.Bottom;
+            aceptarButton.Location = new Point(23, 97);
+            aceptarButton.Margin = new Padding(3, 3, 20, 3);
+            aceptarButton.Name = "aceptarButton";
+            aceptarButton.Size = new Size(75, 23);
+            aceptarButton.TabIndex = 3;
+            aceptarButton.Text = "Aceptar";
+            aceptarButton.UseVisualStyleBackColor = true;
+            aceptarButton.Click += aceptarButton_Click;
+            // 
+            // cancelarButton
+            // 
+            cancelarButton.Anchor = AnchorStyles.Bottom;
+            cancelarButton.Location = new Point(186, 97);
+            cancelarButton.Name = "cancelarButton";
+            cancelarButton.Size = new Size(75, 23);
+            cancelarButton.TabIndex = 4;
+            cancelarButton.Text = "Cancelar";
+            cancelarButton.UseVisualStyleBackColor = true;
+            cancelarButton.Click += cancelarButton_Click;
+            // 
             // PlanDetalle
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -112,6 +112,8 @@
             Controls.Add(aceptarButton);
             Controls.Add(descripcionTextBox);
             Controls.Add(label1);
+            MaximumSize = new Size(300, 182);
+            MinimumSize = new Size(300, 182);
             Name = "PlanDetalle";
             Padding = new Padding(20);
             StartPosition = FormStartPosition.CenterParent;
@@ -125,10 +127,10 @@
 
         private TextBox descripcionTextBox;
         private Label label1;
-        private Button cancelarButton;
-        private Button aceptarButton;
         private Label label2;
         private ComboBox especialidadesComboBox;
         private ErrorProvider errorProvider;
+        private Button cancelarButton;
+        private Button aceptarButton;
     }
 }

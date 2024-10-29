@@ -76,6 +76,7 @@
             // notaNumericUpDown
             // 
             notaNumericUpDown.Location = new Point(116, 59);
+            notaNumericUpDown.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
             notaNumericUpDown.Name = "notaNumericUpDown";
             notaNumericUpDown.Size = new Size(145, 23);
             notaNumericUpDown.TabIndex = 2;
