@@ -53,5 +53,17 @@ namespace WindowsForms.Inscripcion_Folder
             HttpResponseMessage response = await client.PutAsJsonAsync("inscripciones", entity);
             response.EnsureSuccessStatusCode();
         }
+
+        public static async Task<bool> ThereIsCupo(int id)
+        {
+            bool thereIsCupo = false;
+            HttpResponseMessage response = await client.GetAsync("inscripciones/thereIsCupo/" + id);
+            response.EnsureSuccessStatusCode();
+            if (response.IsSuccessStatusCode)
+            {
+                thereIsCupo = await response.Content.ReadAsAsync<bool>();
+            }
+            return thereIsCupo;
+        }
     }
 }

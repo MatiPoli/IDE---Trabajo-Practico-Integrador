@@ -166,6 +166,7 @@
             MinimumSize = new Size(300, 250);
             Name = "CursoDetalle";
             Padding = new Padding(20);
+            StartPosition = FormStartPosition.CenterParent;
             Text = "Curso Detalle";
             ((System.ComponentModel.ISupportInitialize)cupoNumericUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)anioCalendarioNumericUpDown).EndInit();

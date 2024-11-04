@@ -18,7 +18,9 @@ namespace WindowsForms.DocenteCurso_Folder
         {
             int id;
 
-            id = this.SelectedItem().Id;
+            var selectedItem = (dynamic)this.SelectedItem();
+
+            id = selectedItem.Id;
 
             await DocenteCursoApiClient.DeleteAsync(id);
 
@@ -31,25 +33,27 @@ namespace WindowsForms.DocenteCurso_Folder
 
             int id;
 
-            id = this.SelectedItem().Id;
+            var selectedItem = (dynamic)this.SelectedItem();
+
+            id = selectedItem.Id;
 
             Docente_Curso docenteCurso = await DocenteCursoApiClient.GetAsync(id);
 
             docenteCursoDetalle.EditMode = true;
-            docenteCursoDetalle.Docente_Curso = docenteCurso;
+            docenteCursoDetalle.DocenteCurso = docenteCurso;
 
             docenteCursoDetalle.ShowDialog();
 
             this.GetAllAndLoad();
         }
 
-        private async void agregarButton_Click(object sender, EventArgs e)
+        private void agregarButton_Click(object sender, EventArgs e)
         {
             DocenteCursoDetalle docenteCursoDetalle = new DocenteCursoDetalle();
 
             Docente_Curso docenteCursoNuevo = new Docente_Curso();
 
-            docenteCursoDetalle.Docente_Curso = docenteCursoNuevo;
+            docenteCursoDetalle.DocenteCurso = docenteCursoNuevo;
 
             docenteCursoDetalle.ShowDialog();
 
@@ -61,7 +65,22 @@ namespace WindowsForms.DocenteCurso_Folder
             DocenteCursoApiClient client = new DocenteCursoApiClient();
 
             this.docentesCursosDataGridView.DataSource = null;
-            this.docentesCursosDataGridView.DataSource = await DocenteCursoApiClient.GetAllAsync();
+
+            var docentesCursos = await DocenteCursoApiClient.GetAllAsync();
+
+            if (docentesCursos.Any())
+            {
+                var docentesCursosDisplay = docentesCursos.Select(dc => new
+                {
+                    dc.Id,
+                    dc.Curso.Anio_Calendario,
+                    Curso = dc.Curso.Anio_Calendario + "-" + dc.Curso.Materia.Descripcion + "-" + dc.Curso.Comision.Descripcion,
+                    Docente = dc.Docente.Legajo + "-" + dc.Docente.Apellido + " " + dc.Docente.Nombre,
+                    dc.Cargo
+                }).ToList();
+
+                this.docentesCursosDataGridView.DataSource = docentesCursosDisplay;
+            }
 
             if (this.docentesCursosDataGridView.Rows.Count > 0)
             {
@@ -76,13 +95,10 @@ namespace WindowsForms.DocenteCurso_Folder
             }
         }
 
-        private Docente_Curso SelectedItem()
+        private object SelectedItem()
         {
-            Docente_Curso docente_Curso;
+            return docentesCursosDataGridView.SelectedRows[0].DataBoundItem;
 
-            docente_Curso = (Docente_Curso)docentesCursosDataGridView.SelectedRows[0].DataBoundItem;
-
-            return docente_Curso;
         }
     }
 }

@@ -48,7 +48,7 @@ namespace WindowsForms.Especialidad_Folder
             this.GetAllAndLoad();
         }
 
-        private async void agregarButton_Click(object sender, EventArgs e)
+        private void agregarButton_Click(object sender, EventArgs e)
         {
             EspecialidadDetalle especialidadDetalle = new EspecialidadDetalle();
 

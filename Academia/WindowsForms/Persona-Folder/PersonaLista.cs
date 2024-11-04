@@ -38,7 +38,7 @@ namespace WindowsForms
             this.GetAllAndLoad();
         }
 
-        private async void agregarButton_Click(object sender, EventArgs e)
+        private void agregarButton_Click(object sender, EventArgs e)
         {
             PersonaDetalle personaDetalle = new PersonaDetalle();
 

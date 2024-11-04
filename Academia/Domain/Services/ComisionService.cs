@@ -10,7 +10,6 @@ namespace Domain.Services
         {
             using var context = new AcademiaContext();
 
-            context.Attach(comision.Plan);
             context.Comisiones.Add(comision);
             context.SaveChanges();
         }
@@ -31,8 +30,6 @@ namespace Domain.Services
             using var context = new AcademiaContext();
 
             return context.Comisiones
-                .Include(c => c.Plan)
-                    .ThenInclude(plan => plan.Especialidad)
                 .FirstOrDefault(c => c.Id == id);
         }
 
@@ -41,8 +38,6 @@ namespace Domain.Services
             using var context = new AcademiaContext();
 
             return context.Comisiones
-                .Include(c => c.Plan)
-                    .ThenInclude(plan => plan.Especialidad)
                 .ToList();
         }
 
@@ -56,7 +51,6 @@ namespace Domain.Services
             {
                 comisionToUpdate.Descripcion = comision.Descripcion;
                 comisionToUpdate.Anio = comision.Anio;
-                comisionToUpdate.Plan = comision.Plan;
                 context.SaveChanges();
             }
         }

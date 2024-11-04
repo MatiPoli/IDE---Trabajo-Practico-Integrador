@@ -5,6 +5,6 @@ namespace Domain.Models
         public int Id { get; set; }
         public string Descripcion { get; set; } = null!;
         public int Anio { get; set; }
-        public Plan Plan { get; set; } = null!;
+        //public Plan Plan { get; set; } = null!; // Da muchos problemas
     }
 }

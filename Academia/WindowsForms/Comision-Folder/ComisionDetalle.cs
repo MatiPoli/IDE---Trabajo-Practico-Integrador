@@ -24,20 +24,10 @@ namespace WindowsForms.Comision_Folder
         }
         public async void SetComision()
         {
-            PlanApiClient clientPlan = new PlanApiClient();
-
-            this.planes = await PlanApiClient.GetAllAsync();
-            foreach (Plan plan in this.planes)
-            {
-                this.planesComboBox.Items.Add(plan.Descripcion);
-            }
-
             if (this.EditMode)
             {
                 this.descripcionTextBox.Text = this.comision.Descripcion;
                 this.anioNumericUpDown.Value = this.comision.Anio;
-                this.planesComboBox.Text = this.comision.Plan.Descripcion;
-                this.planesComboBox.SelectedIndex = this.planes.ToList().FindIndex(e => e.Id == this.comision.Plan.Id);
             }
         }
         private async void aceptarButton_Click(object sender, EventArgs e)
@@ -48,8 +38,6 @@ namespace WindowsForms.Comision_Folder
             {
                 this.comision.Descripcion = this.descripcionTextBox.Text;
                 this.comision.Anio = (int)this.anioNumericUpDown.Value;
-                this.comision.Plan = this.planes.ElementAt(planesComboBox.SelectedIndex);
-
 
                 if (this.EditMode)
                 {
@@ -74,18 +62,12 @@ namespace WindowsForms.Comision_Folder
             bool isValid = true;
 
             errorProvider.SetError(descripcionTextBox, string.Empty);
-            errorProvider.SetError(planesComboBox, string.Empty);
 
 
             if (this.descripcionTextBox.Text == string.Empty)
             {
                 isValid = false;
                 errorProvider.SetError(descripcionTextBox, "La Descripcíón es Requerida");
-            }
-            if (this.planesComboBox.Text == string.Empty)
-            {
-                isValid = false;
-                errorProvider.SetError(planesComboBox, "El Plan es Requerido");
             }
 
             return isValid;

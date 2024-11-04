@@ -30,7 +30,6 @@
         {
             components = new System.ComponentModel.Container();
             errorProvider = new ErrorProvider(components);
-            docentesComboBox = new ComboBox();
             label4 = new Label();
             cursosComboBox = new ComboBox();
             label2 = new Label();
@@ -38,22 +37,13 @@
             label1 = new Label();
             cancelarButton = new Button();
             aceptarButton = new Button();
+            docentesComboBox = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)errorProvider).BeginInit();
             SuspendLayout();
             // 
             // errorProvider
             // 
             errorProvider.ContainerControl = this;
-            // 
-            // docentesComboBox
-            // 
-            docentesComboBox.FormattingEnabled = true;
-            docentesComboBox.ItemHeight = 15;
-            docentesComboBox.Location = new Point(116, 58);
-            docentesComboBox.Name = "docentesComboBox";
-            docentesComboBox.Size = new Size(145, 23);
-            docentesComboBox.TabIndex = 2;
-            docentesComboBox.SelectedIndexChanged += cursosComboBox_SelectedIndexChanged;
             // 
             // label4
             // 
@@ -64,7 +54,6 @@
             label4.Size = new Size(51, 15);
             label4.TabIndex = 32;
             label4.Text = "Docente";
-            label4.Click += this.label4_Click;
             // 
             // cursosComboBox
             // 
@@ -74,7 +63,6 @@
             cursosComboBox.Name = "cursosComboBox";
             cursosComboBox.Size = new Size(145, 23);
             cursosComboBox.TabIndex = 1;
-            cursosComboBox.SelectedIndexChanged += this.alumnosComboBox_SelectedIndexChanged;
             // 
             // label2
             // 
@@ -85,7 +73,6 @@
             label2.Size = new Size(38, 15);
             label2.TabIndex = 31;
             label2.Text = "Curso";
-            label2.Click += this.label2_Click;
             // 
             // cargoComboBox
             // 
@@ -128,16 +115,25 @@
             aceptarButton.UseVisualStyleBackColor = true;
             aceptarButton.Click += aceptarButton_Click;
             // 
+            // docentesComboBox
+            // 
+            docentesComboBox.FormattingEnabled = true;
+            docentesComboBox.ItemHeight = 15;
+            docentesComboBox.Location = new Point(116, 58);
+            docentesComboBox.Name = "docentesComboBox";
+            docentesComboBox.Size = new Size(145, 23);
+            docentesComboBox.TabIndex = 2;
+            // 
             // DocenteCursoDetalle
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(284, 180);
+            Controls.Add(docentesComboBox);
             Controls.Add(cancelarButton);
             Controls.Add(aceptarButton);
             Controls.Add(cargoComboBox);
             Controls.Add(label1);
-            Controls.Add(docentesComboBox);
             Controls.Add(label4);
             Controls.Add(cursosComboBox);
             Controls.Add(label2);
@@ -145,6 +141,7 @@
             MinimumSize = new Size(300, 219);
             Name = "DocenteCursoDetalle";
             Padding = new Padding(20);
+            StartPosition = FormStartPosition.CenterParent;
             Text = "Docente-Curso Detalle";
             ((System.ComponentModel.ISupportInitialize)errorProvider).EndInit();
             ResumeLayout(false);
@@ -154,7 +151,6 @@
         #endregion
 
         private ErrorProvider errorProvider;
-        private ComboBox docentesComboBox;
         private Label label4;
         private ComboBox cursosComboBox;
         private Label label2;
@@ -162,5 +158,6 @@
         private Label label1;
         private Button cancelarButton;
         private Button aceptarButton;
+        private ComboBox docentesComboBox;
     }
 }

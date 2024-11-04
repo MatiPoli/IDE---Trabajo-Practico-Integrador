@@ -25,13 +25,6 @@ namespace WindowsForms
 
         public async void SetPersona()
         {
-            PlanApiClient clientPlan = new PlanApiClient();
-
-            this.planes = await PlanApiClient.GetAllAsync();
-            foreach (Plan plan in this.planes)
-            {
-                this.planesComboBox.Items.Add(plan.Descripcion);
-            }
 
             if (this.EditMode)
             {
@@ -41,8 +34,6 @@ namespace WindowsForms
                 this.emailTextBox.Text = this.persona.Email;
                 this.telefonoTextBox.Text = this.persona.Telefono;
                 this.legajoTextBox.Text = this.persona.Legajo;
-                this.planesComboBox.Text = this.persona.Plan.Descripcion;
-                this.planesComboBox.SelectedIndex = this.planes.ToList().FindIndex(p => p.Id == this.persona.Plan.Id);
 
 
                 if (DateTime.TryParse(this.persona.Fecha_Nac, out DateTime fechaNac))
@@ -71,7 +62,6 @@ namespace WindowsForms
                 this.Persona.Telefono = this.telefonoTextBox.Text;
                 this.Persona.Legajo = this.legajoTextBox.Text;
                 this.Persona.Fecha_Nac = this.fechaNacDateTimePicker.Value.ToString("yyyy-MM-dd");
-                this.Persona.Plan = this.planes.ElementAt(planesComboBox.SelectedIndex);
 
                 if (this.EditMode)
                 {
@@ -97,7 +87,6 @@ namespace WindowsForms
             errorProvider.SetError(telefonoTextBox, string.Empty);
             errorProvider.SetError(legajoTextBox, string.Empty);
             errorProvider.SetError(fechaNacDateTimePicker, string.Empty);
-            errorProvider.SetError(planesComboBox, string.Empty);
 
 
             if (this.nombreTextBox.Text == string.Empty)
@@ -139,11 +128,6 @@ namespace WindowsForms
             {
                 isValid = false;
                 errorProvider.SetError(fechaNacDateTimePicker, "La Fecha de Nacimiento es Requerida");
-            }
-            if (this.planesComboBox.Text == string.Empty)
-            {
-                isValid = false;
-                errorProvider.SetError(planesComboBox, "El Plan es Requerido");
             }
 
             return isValid;

@@ -60,7 +60,7 @@ namespace WindowsForms.Inscripcion_Folder
         {
             InscripcionApiClient client = new InscripcionApiClient();
 
-            if (this.ValidateInscripcion())
+            if (await this.ValidateInscripcion())
             {
                 this.inscripcion.Condicion = this.condicionComboBox.Text;
                 this.inscripcion.Nota = (int)this.notaNumericUpDown.Value;
@@ -86,7 +86,7 @@ namespace WindowsForms.Inscripcion_Folder
             this.Close();
         }
 
-        private bool ValidateInscripcion()
+        private async Task<bool> ValidateInscripcion()
         {
             bool isValid = true;
 
@@ -110,6 +110,13 @@ namespace WindowsForms.Inscripcion_Folder
             {
                 isValid = false;
                 errorProvider.SetError(cursosComboBox, "El Curso es Requerido");
+            }
+
+            var curso = this.cursos.ElementAt(cursosComboBox.SelectedIndex);
+            if ( !await InscripcionApiClient.ThereIsCupo(curso.Id) )
+            {
+                isValid = false;
+                errorProvider.SetError(cursosComboBox, "No hay cupo disponible para este curso");
             }
 
             return isValid;

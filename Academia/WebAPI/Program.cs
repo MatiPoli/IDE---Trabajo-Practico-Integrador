@@ -40,6 +40,24 @@ app.MapGet("/personas", () =>
 .WithName("GetAllPersonas")
 .WithOpenApi();
 
+app.MapGet("/docentes", () =>
+{
+    PersonaService service = new PersonaService();
+
+    return service.GetAllDocentes();
+})
+.WithName("GetAllDocentes")
+.WithOpenApi();
+
+app.MapGet("/alumnos", () =>
+{
+    PersonaService service = new PersonaService();
+
+    return service.GetAllAlumnos();
+})
+.WithName("GetAllAlumnos")
+.WithOpenApi();
+
 app.MapPost("/personas", (Persona entity) =>
 {
     PersonaService service = new PersonaService();
@@ -387,6 +405,15 @@ app.MapDelete("/inscripciones/{id}", (int id) =>
     service.Delete(id);
 })
 .WithName("DeleteInscripcion")
+.WithOpenApi();
+
+app.MapGet("/inscripciones/thereIsCupo/{id}", (int id) =>
+{
+    InscripcionService service = new InscripcionService();
+
+    return service.ThereIsCupo(id);
+})
+.WithName("ThereIsCupo")
 .WithOpenApi();
 
 //app.MapGet("/", () => "Hello World!");

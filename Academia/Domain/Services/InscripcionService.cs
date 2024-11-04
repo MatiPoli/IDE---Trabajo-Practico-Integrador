@@ -33,10 +33,12 @@ namespace Domain.Services
 
             return context.Inscripciones
                 .Include(i => i.Alumno)
-                    .ThenInclude(alumno => alumno.Plan)
-                        .ThenInclude(plan => plan.Especialidad)
                 .Include(i => i.Curso)
                     .ThenInclude(curso => curso.Comision)
+                .Include(i => i.Curso)
+                    .ThenInclude(curso => curso.Materia)
+                        .ThenInclude(materia => materia.Plan)
+                                .ThenInclude(plan => plan.Especialidad)
                 .FirstOrDefault(i => i.Id == id);
         }
 
@@ -46,10 +48,12 @@ namespace Domain.Services
 
             return context.Inscripciones
                 .Include(i => i.Alumno)
-                    .ThenInclude(alumno => alumno.Plan)
-                        .ThenInclude(plan => plan.Especialidad)
                 .Include(i => i.Curso)
                     .ThenInclude(curso => curso.Comision)
+                .Include(i => i.Curso)
+                    .ThenInclude(curso => curso.Materia)
+                        .ThenInclude(materia => materia.Plan)
+                            .ThenInclude(plan => plan.Especialidad)
                 .ToList();
         }
 
@@ -67,6 +71,15 @@ namespace Domain.Services
                 inscripcionToUpdate.Curso = inscripcion.Curso;
                 context.SaveChanges();
             }
+        }
+
+        public bool ThereIsCupo(int id)
+        {
+            using var context = new AcademiaContext();
+
+            Curso? curso = context.Cursos.Find(id);
+            return context.Inscripciones
+                .Count(i => i.Curso.Id == curso.Id) < curso.Cupo;
         }
     }
 }

@@ -12,6 +12,7 @@ namespace Domain.Services
 
             context.Attach(curso.Comision);
             context.Attach(curso.Materia);
+
             context.Cursos.Add(curso);
             context.SaveChanges();
         }
@@ -38,8 +39,6 @@ namespace Domain.Services
                     .ThenInclude(materia => materia.Plan)
                         .ThenInclude(plan => plan.Especialidad)
                 .Include(c => c.Comision)
-                    .ThenInclude(comision => comision.Plan)
-                        .ThenInclude(plan => plan.Especialidad)
                 .FirstOrDefault(c => c.Id == id);
         }
 
@@ -52,8 +51,6 @@ namespace Domain.Services
                     .ThenInclude(materia => materia.Plan)
                         .ThenInclude(plan => plan.Especialidad)
                  .Include(c => c.Comision)
-                    .ThenInclude(comision => comision.Plan)
-                        .ThenInclude(plan => plan.Especialidad)
                 .ToList();
         }
 

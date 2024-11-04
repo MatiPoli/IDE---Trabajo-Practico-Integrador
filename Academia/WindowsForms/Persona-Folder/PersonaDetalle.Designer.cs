@@ -46,8 +46,6 @@
             legajoTextBox = new TextBox();
             fechaNacDateTimePicker = new DateTimePicker();
             errorProvider = new ErrorProvider(components);
-            label8 = new Label();
-            planesComboBox = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)errorProvider).BeginInit();
             SuspendLayout();
             // 
@@ -199,31 +197,11 @@
             // 
             errorProvider.ContainerControl = this;
             // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Location = new Point(23, 265);
-            label8.Margin = new Padding(3, 0, 3, 20);
-            label8.Name = "label8";
-            label8.Size = new Size(30, 15);
-            label8.TabIndex = 10;
-            label8.Text = "Plan";
-            // 
-            // planesComboBox
-            // 
-            planesComboBox.FormattingEnabled = true;
-            planesComboBox.Location = new Point(116, 262);
-            planesComboBox.Name = "planesComboBox";
-            planesComboBox.Size = new Size(145, 23);
-            planesComboBox.TabIndex = 11;
-            // 
             // PersonaDetalle
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(284, 361);
-            Controls.Add(planesComboBox);
-            Controls.Add(label8);
             Controls.Add(fechaNacDateTimePicker);
             Controls.Add(legajoTextBox);
             Controls.Add(telefonoTextBox);
@@ -270,7 +248,5 @@
         private TextBox legajoTextBox;
         private DateTimePicker fechaNacDateTimePicker;
         private ErrorProvider errorProvider;
-        private ComboBox planesComboBox;
-        private Label label8;
     }
 }

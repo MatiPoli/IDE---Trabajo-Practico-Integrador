@@ -34,8 +34,6 @@
             errorProvider = new ErrorProvider(components);
             label2 = new Label();
             anioNumericUpDown = new NumericUpDown();
-            planesComboBox = new ComboBox();
-            label4 = new Label();
             cancelarButton = new Button();
             aceptarButton = new Button();
             ((System.ComponentModel.ISupportInitialize)errorProvider).BeginInit();
@@ -83,25 +81,6 @@
             anioNumericUpDown.TabIndex = 2;
             anioNumericUpDown.Value = new decimal(new int[] { 1900, 0, 0, 0 });
             // 
-            // planesComboBox
-            // 
-            planesComboBox.FormattingEnabled = true;
-            planesComboBox.ItemHeight = 15;
-            planesComboBox.Location = new Point(116, 93);
-            planesComboBox.Name = "planesComboBox";
-            planesComboBox.Size = new Size(145, 23);
-            planesComboBox.TabIndex = 3;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(23, 96);
-            label4.Margin = new Padding(3, 0, 3, 20);
-            label4.Name = "label4";
-            label4.Size = new Size(30, 15);
-            label4.TabIndex = 36;
-            label4.Text = "Plan";
-            // 
             // cancelarButton
             // 
             cancelarButton.Anchor = AnchorStyles.Bottom;
@@ -132,8 +111,6 @@
             ClientSize = new Size(284, 178);
             Controls.Add(cancelarButton);
             Controls.Add(aceptarButton);
-            Controls.Add(planesComboBox);
-            Controls.Add(label4);
             Controls.Add(label2);
             Controls.Add(anioNumericUpDown);
             Controls.Add(descripcionTextBox);
@@ -142,6 +119,7 @@
             MinimumSize = new Size(300, 217);
             Name = "ComisionDetalle";
             Padding = new Padding(20);
+            StartPosition = FormStartPosition.CenterParent;
             Text = "Comision Detalle";
             ((System.ComponentModel.ISupportInitialize)errorProvider).EndInit();
             ((System.ComponentModel.ISupportInitialize)anioNumericUpDown).EndInit();
@@ -156,8 +134,6 @@
         private ErrorProvider errorProvider;
         private Label label2;
         private NumericUpDown anioNumericUpDown;
-        private ComboBox planesComboBox;
-        private Label label4;
         private Button cancelarButton;
         private Button aceptarButton;
     }

@@ -18,7 +18,9 @@ namespace WindowsForms.Curso_Folder
         {
             int id;
 
-            id = this.SelectedItem().Id;
+            var selectedItem = (dynamic)this.SelectedItem();
+
+            id = selectedItem.Id;
 
             await CursoApiClient.DeleteAsync(id);
 
@@ -31,7 +33,9 @@ namespace WindowsForms.Curso_Folder
 
             int id;
 
-            id = this.SelectedItem().Id;
+            var selectedItem = (dynamic)this.SelectedItem();
+
+            id = selectedItem.Id;
 
             Curso curso = await CursoApiClient.GetAsync(id);
 
@@ -61,7 +65,19 @@ namespace WindowsForms.Curso_Folder
             CursoApiClient client = new CursoApiClient();
 
             this.cursosDataGridView.DataSource = null;
-            this.cursosDataGridView.DataSource = await CursoApiClient.GetAllAsync();
+
+            var cursos = await CursoApiClient.GetAllAsync();
+
+            var cursosDisplay = cursos.Select(c => new
+            {
+                c.Id,
+                c.Anio_Calendario,
+                c.Cupo,
+                Materia = c.Materia.Descripcion + "-" + c.Materia.Plan.Descripcion + "-" + c.Materia.Plan.Especialidad.Descripcion,
+                Comision = c.Comision.Descripcion + "-" + c.Comision.Anio
+            }).ToList();
+
+            this.cursosDataGridView.DataSource = cursosDisplay;
 
             if (this.cursosDataGridView.Rows.Count > 0)
             {
@@ -76,13 +92,9 @@ namespace WindowsForms.Curso_Folder
             }
         }
 
-        private Curso SelectedItem()
+        private object SelectedItem()
         {
-            Curso curso;
-
-            curso = (Curso)cursosDataGridView.SelectedRows[0].DataBoundItem;
-
-            return curso;
+            return cursosDataGridView.SelectedRows[0].DataBoundItem;
         }
     }
 }

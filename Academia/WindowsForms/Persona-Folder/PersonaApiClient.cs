@@ -26,6 +26,28 @@ namespace WindowsForms
             return entity;
         }
 
+        public static async Task<IEnumerable<Persona>> GetAllDocentesAsync()
+        {
+            IEnumerable<Persona> entities = null;
+            HttpResponseMessage response = await client.GetAsync("docentes");
+            if (response.IsSuccessStatusCode)
+            {
+                entities = await response.Content.ReadAsAsync<IEnumerable<Persona>>();
+            }
+            return entities;
+        }
+
+        public static async Task<IEnumerable<Persona>> GetAllAlumnosAsync()
+        {
+            IEnumerable<Persona> entities = null;
+            HttpResponseMessage response = await client.GetAsync("alumnos");
+            if (response.IsSuccessStatusCode)
+            {
+                entities = await response.Content.ReadAsAsync<IEnumerable<Persona>>();
+            }
+            return entities;
+        }
+
         public static async Task<IEnumerable<Persona>> GetAllAsync()
         {
             IEnumerable<Persona> entities = null;

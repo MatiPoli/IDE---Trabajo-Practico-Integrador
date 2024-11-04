@@ -18,7 +18,9 @@ namespace WindowsForms.Materia_Folder
         {
             int id;
 
-            id = this.SelectedItem().Id;
+            var selectedItem = (dynamic)this.SelectedItem();
+
+            id = selectedItem.Id;
 
             await MateriaApiClient.DeleteAsync(id);
 
@@ -31,7 +33,9 @@ namespace WindowsForms.Materia_Folder
 
             int id;
 
-            id = this.SelectedItem().Id;
+            var selectedItem = (dynamic)this.SelectedItem();
+
+            id = selectedItem.Id;
 
             Materia materia = await MateriaApiClient.GetAsync(id);
 
@@ -43,7 +47,7 @@ namespace WindowsForms.Materia_Folder
             this.GetAllAndLoad();
         }
 
-        private async void agregarButton_Click(object sender, EventArgs e)
+        private void agregarButton_Click(object sender, EventArgs e)
         {
             MateriaDetalle materiaDetalle = new MateriaDetalle();
 
@@ -61,7 +65,22 @@ namespace WindowsForms.Materia_Folder
             MateriaApiClient client = new MateriaApiClient();
 
             this.materiasDataGridView.DataSource = null;
-            this.materiasDataGridView.DataSource = await MateriaApiClient.GetAllAsync();
+
+            var materias = await MateriaApiClient.GetAllAsync();
+
+            if ( materias.Any())
+            {
+                var materiasDisplay = materias.Select(m => new
+                {
+                    m.Id,
+                    m.Descripcion,
+                    m.Hs_Semanales,
+                    m.Hs_Totales,
+                    Plan = m.Plan.Descripcion + "-" + m.Plan.Especialidad.Descripcion
+                }).ToList();
+
+                this.materiasDataGridView.DataSource = materiasDisplay;
+            }
 
             if (this.materiasDataGridView.Rows.Count > 0)
             {
@@ -76,13 +95,9 @@ namespace WindowsForms.Materia_Folder
             }
         }
 
-        private Materia SelectedItem()
+        private object SelectedItem()
         {
-            Materia materia;
-
-            materia = (Materia)materiasDataGridView.SelectedRows[0].DataBoundItem;
-
-            return materia;
+            return materiasDataGridView.SelectedRows[0].DataBoundItem;
         }
     }
 }

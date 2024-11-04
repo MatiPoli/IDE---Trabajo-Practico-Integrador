@@ -46,15 +46,6 @@ namespace Domain.Context
                 .WithMany()
                 .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Persona>()
-                .HasOne(p => p.Plan)
-                .WithMany()
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Comision>()
-                .HasOne(c => c.Plan)
-                .WithMany()
-                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Docente_Curso>()
                 .HasOne(dc => dc.Curso)

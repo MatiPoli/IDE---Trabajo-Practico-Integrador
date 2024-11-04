@@ -31,13 +31,15 @@ namespace WindowsForms.Materia_Folder
             this.planes = await PlanApiClient.GetAllAsync();
             foreach (Plan plan in this.planes)
             {
-                this.planesComboBox.Items.Add(plan.Descripcion);
+                this.planesComboBox.Items.Add(plan.Descripcion + "-" + plan.Especialidad.Descripcion);
             }
 
             if (this.EditMode)
             {
                 this.descripcionTextBox.Text = this.materia.Descripcion;
-                this.planesComboBox.Text = this.materia.Plan.Descripcion;
+                this.hsSemanalesNumericUpDown.Value = this.materia.Hs_Semanales;
+                this.hsTotalesNumericUpDown.Value = this.materia.Hs_Totales;
+                this.planesComboBox.Text = this.materia.Plan.Descripcion + "-" + this.materia.Plan.Especialidad.Descripcion;
                 this.planesComboBox.SelectedIndex = this.planes.ToList().FindIndex(e => e.Id == this.materia.Plan.Id);
             }
         }

@@ -18,7 +18,9 @@ namespace WindowsForms.Inscripcion_Folder
         {
             int id;
 
-            id = this.SelectedItem().Id;
+            var selectedItem = (dynamic)this.SelectedItem();
+
+            id = selectedItem.Id;
 
             await InscripcionApiClient.DeleteAsync(id);
 
@@ -31,7 +33,9 @@ namespace WindowsForms.Inscripcion_Folder
 
             int id;
 
-            id = this.SelectedItem().Id;
+            var selectedItem = (dynamic)this.SelectedItem();
+
+            id = selectedItem.Id;
 
             Inscripcion inscripcion = await InscripcionApiClient.GetAsync(id);
 
@@ -43,7 +47,7 @@ namespace WindowsForms.Inscripcion_Folder
             this.GetAllAndLoad();
         }
 
-        private async void agregarButton_Click(object sender, EventArgs e)
+        private void agregarButton_Click(object sender, EventArgs e)
         {
             InscripcionDetalle inscripcionDetalle = new InscripcionDetalle();
 
@@ -61,8 +65,23 @@ namespace WindowsForms.Inscripcion_Folder
             InscripcionApiClient client = new InscripcionApiClient();
 
             this.inscripcionesDataGridView.DataSource = null;
-            this.inscripcionesDataGridView.DataSource = await InscripcionApiClient.GetAllAsync();
 
+            var inscripciones = await InscripcionApiClient.GetAllAsync();
+
+            if (inscripciones.Any())
+            {
+                var inscripcionesDisplay = inscripciones.Select(i => new
+                {
+                    i.Id,
+                    i.Condicion,
+                    i.Nota,
+                    Alumno = i.Alumno.Legajo + "-" + i.Alumno.Apellido + " " + i.Alumno.Nombre,
+                    Curso = i.Curso.Anio_Calendario + "-" + i.Curso.Materia.Descripcion + "-" + i.Curso.Comision.Descripcion
+                }).ToList();
+
+                this.inscripcionesDataGridView.DataSource = inscripcionesDisplay;
+            }
+            
             if (this.inscripcionesDataGridView.Rows.Count > 0)
             {
                 this.inscripcionesDataGridView.Rows[0].Selected = true;
@@ -76,13 +95,9 @@ namespace WindowsForms.Inscripcion_Folder
             }
         }
 
-        private Inscripcion SelectedItem()
+        private object SelectedItem()
         {
-            Inscripcion inscripcion;
-
-            inscripcion = (Inscripcion)inscripcionesDataGridView.SelectedRows[0].DataBoundItem;
-
-            return inscripcion;
+            return inscripcionesDataGridView.SelectedRows[0].DataBoundItem;
         }
     }
 }

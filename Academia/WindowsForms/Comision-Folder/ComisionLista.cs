@@ -43,7 +43,7 @@ namespace WindowsForms.Comision_Folder
             this.GetAllAndLoad();
         }
 
-        private async void agregarButton_Click(object sender, EventArgs e)
+        private void agregarButton_Click(object sender, EventArgs e)
         {
             ComisionDetalle comisionDetalle = new ComisionDetalle();
 

@@ -13,7 +13,9 @@ namespace WindowsForms
         {
             int id;
 
-            id = this.SelectedItem().Id;
+            var selectedItem = (dynamic)this.SelectedItem();
+
+            id = selectedItem.Id;
 
             await PlanApiClient.DeleteAsync(id);
 
@@ -26,7 +28,9 @@ namespace WindowsForms
 
             int id;
 
-            id = this.SelectedItem().Id;
+            var selectedItem = (dynamic)this.SelectedItem();
+
+            id = selectedItem.Id;
 
             Plan plan = await PlanApiClient.GetAsync(id);
 
@@ -38,7 +42,7 @@ namespace WindowsForms
             this.GetAllAndLoad();
         }
 
-        private async void agregarButton_Click(object sender, EventArgs e)
+        private void agregarButton_Click(object sender, EventArgs e)
         {
             PlanDetalle planDetalle = new PlanDetalle();
 
@@ -56,8 +60,21 @@ namespace WindowsForms
             PlanApiClient client = new PlanApiClient();
 
             this.planesDataGridView.DataSource = null;
-            this.planesDataGridView.DataSource = await PlanApiClient.GetAllAsync();
 
+            var planes = await PlanApiClient.GetAllAsync();
+
+            if (planes.Any())
+            {
+                var planesDisplay = planes.Select(p => new
+                {
+                    p.Id,
+                    p.Descripcion,
+                    Especialidad = p.Especialidad.Descripcion
+                }).ToList();
+
+                this.planesDataGridView.DataSource = planesDisplay;
+            }
+            
             if (this.planesDataGridView.Rows.Count > 0)
             {
                 this.planesDataGridView.Rows[0].Selected = true;
@@ -71,13 +88,9 @@ namespace WindowsForms
             }
         }
 
-        private Plan SelectedItem()
+        private object SelectedItem()
         {
-            Plan plan;
-
-            plan = (Plan)planesDataGridView.SelectedRows[0].DataBoundItem;
-
-            return plan;
+            return planesDataGridView.SelectedRows[0].DataBoundItem;
         }
 
         private void PlanLista_Load(object sender, EventArgs e)

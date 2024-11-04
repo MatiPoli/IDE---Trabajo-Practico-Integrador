@@ -10,7 +10,6 @@ namespace Domain.Services
         {
             using var context = new AcademiaContext();
 
-            context.Attach(persona.Plan);
             context.Personas.Add(persona);
             context.SaveChanges();
         }
@@ -33,8 +32,6 @@ namespace Domain.Services
             using var context = new AcademiaContext();
 
             return context.Personas
-                .Include(p => p.Plan)
-                    .ThenInclude(plan => plan.Especialidad)
                 .FirstOrDefault(p => p.Id == id);
         }
 
@@ -43,8 +40,24 @@ namespace Domain.Services
             using var context = new AcademiaContext();
 
             return context.Personas
-                .Include(p => p.Plan)
-                    .ThenInclude(plan => plan.Especialidad)
+                .ToList();
+        }
+
+        public IEnumerable<Persona> GetAllDocentes()
+        {
+            using var context = new AcademiaContext();
+
+            return context.Personas
+                .Where(p => p.Tipo_Persona == 2)
+                .ToList();
+        }
+
+        public IEnumerable<Persona> GetAllAlumnos()
+        {
+            using var context = new AcademiaContext();
+
+            return context.Personas
+                .Where(p => p.Tipo_Persona == 1)
                 .ToList();
         }
 
@@ -63,7 +76,6 @@ namespace Domain.Services
                 personaToUpdate.Telefono = persona.Telefono;
                 personaToUpdate.Fecha_Nac = persona.Fecha_Nac;
                 personaToUpdate.Legajo = persona.Legajo;
-                personaToUpdate.Plan = persona.Plan;
 
                 context.SaveChanges();
             }

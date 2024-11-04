@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿
+using WindowsForms.Comision_Folder;
+using WindowsForms.Curso_Folder;
+using WindowsForms.DocenteCurso_Folder;
 using WindowsForms.Especialidad_Folder;
+using WindowsForms.Inscripcion_Folder;
+using WindowsForms.Materia_Folder;
 
 namespace WindowsForms
 {
@@ -34,6 +31,36 @@ namespace WindowsForms
         {
             EspecialidadLista especialidadLista = new EspecialidadLista();
             especialidadLista.ShowDialog();
+        }
+
+        private void materiasButton_Click(object sender, EventArgs e)
+        {
+            MateriaLista materiaLista = new MateriaLista();
+            materiaLista.ShowDialog();
+        }
+
+        private void comisionesButton_Click(object sender, EventArgs e)
+        {
+            ComisionLista comisionLista = new ComisionLista();
+            comisionLista.ShowDialog();
+        }
+
+        private void cursosButton_Click(object sender, EventArgs e)
+        {
+            CursoLista cursoLista = new CursoLista();
+            cursoLista.ShowDialog();
+        }
+
+        private void inscripcionesButton_Click(object sender, EventArgs e)
+        {
+            InscripcionLista inscripcionLista = new InscripcionLista();
+            inscripcionLista.ShowDialog();
+        }
+
+        private void docenteCursoButton_Click(object sender, EventArgs e)
+        {
+            DocenteCursoLista docenteCursoLista = new DocenteCursoLista();
+            docenteCursoLista.ShowDialog();
         }
     }
 }
