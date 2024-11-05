@@ -1,0 +1,81 @@
+﻿@page "/personas"
+@inject HttpClient Http
+@using Domain.Models
+@using System.Net.Http.Headers
+<PageTitle>Personas</PageTitle>
+
+<h1>Personas</h1>
+
+
+@if (personas == null)
+{
+    <p><em>Cargando...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Direccion</th>
+                <th>Email</th>
+                <th>Telefono</th>
+                <th>Fecha de Nacimiento</th>
+                <th>Legajo</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var persona in personas)
+            {
+                <tr>
+                    <td>@persona.Id</td>
+                    <td>@persona.Nombre</td>
+                    <td>@persona.Apellido</td>
+                    <td>@persona.Direccion</td>
+                    <td>@persona.Email</td>
+                    <td>@persona.Telefono</td>
+                    <td>@persona.Fecha_Nac</td>
+                    <td>@persona.Legajo</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private IEnumerable<Persona> personas;
+
+    protected override async Task OnInitializedAsync()
+    {
+        PersonasApiClient client = new PersonasApiClient();
+
+        personas = await PersonasApiClient.GetAllAsync();
+    }
+    public class PersonasApiClient
+    {
+        private static HttpClient client = new HttpClient();
+        static PersonasApiClient()
+        {
+            client.BaseAddress = new Uri("http://localhost:5003/");
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+        }
+
+        public static async Task<IEnumerable<Persona>> GetAllAsync()
+        {
+            IEnumerable<Persona> personas = null;
+            HttpResponseMessage response = await client.GetAsync("personas");
+            if (response.IsSuccessStatusCode)
+            {
+                personas = await response.Content.ReadAsAsync<IEnumerable<Persona>>();
+
+            }
+            return personas;
+        }
+
+    }
+
+}

@@ -7,6 +7,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpLogging(o => { });
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins",
+        policy =>
+        {
+            policy.AllowAnyOrigin()
+                   .AllowAnyHeader()
+                   .AllowAnyMethod();
+        });
+});
 
 var app = builder.Build();
 
@@ -19,7 +29,10 @@ if (app.Environment.IsDevelopment())
     app.UseHttpLogging();
 }
 
+app.UseCors("AllowAllOrigins");
 app.UseHttpsRedirection();
+
+
 
 // Personas
 app.MapGet("/personas/{id}", (int id) =>

@@ -34,7 +34,18 @@ namespace WindowsForms
                 this.emailTextBox.Text = this.persona.Email;
                 this.telefonoTextBox.Text = this.persona.Telefono;
                 this.legajoTextBox.Text = this.persona.Legajo;
-
+                if (this.persona.Tipo_Persona == 1)
+                {
+                    this.tipoPersonaComboBox.Text = "Alumno";
+                }
+                else if (this.persona.Tipo_Persona == 2)
+                {
+                    this.tipoPersonaComboBox.Text = "Docente";
+                }
+                else if (this.persona.Tipo_Persona == 3)
+                {
+                    this.tipoPersonaComboBox.Text = "Admin";
+                }
 
                 if (DateTime.TryParse(this.persona.Fecha_Nac, out DateTime fechaNac))
                 {
@@ -62,6 +73,18 @@ namespace WindowsForms
                 this.Persona.Telefono = this.telefonoTextBox.Text;
                 this.Persona.Legajo = this.legajoTextBox.Text;
                 this.Persona.Fecha_Nac = this.fechaNacDateTimePicker.Value.ToString("yyyy-MM-dd");
+                if (this.tipoPersonaComboBox.Text == "Alumno")
+                {
+                    this.Persona.Tipo_Persona = 1;
+                }
+                else if (this.tipoPersonaComboBox.Text == "Docente")
+                {
+                    this.Persona.Tipo_Persona = 2;
+                }
+                else if (this.tipoPersonaComboBox.Text == "Admin")
+                {
+                    this.Persona.Tipo_Persona = 3;
+                }
 
                 if (this.EditMode)
                 {
