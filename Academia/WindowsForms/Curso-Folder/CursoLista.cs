@@ -67,18 +67,20 @@ namespace WindowsForms.Curso_Folder
             this.cursosDataGridView.DataSource = null;
 
             var cursos = await CursoApiClient.GetAllAsync();
-
-            var cursosDisplay = cursos.Select(c => new
+            if (cursos.Any())
             {
-                c.Id,
-                c.Anio_Calendario,
-                c.Cupo,
-                Materia = c.Materia.Descripcion + "-" + c.Materia.Plan.Descripcion + "-" + c.Materia.Plan.Especialidad.Descripcion,
-                Comision = c.Comision.Descripcion + "-" + c.Comision.Anio
-            }).ToList();
+                var cursosDisplay = cursos.Select(c => new
+                {
+                    c.Id,
+                    c.Anio_Calendario,
+                    c.Cupo,
+                    Materia = c.Materia.Descripcion + "-" + c.Materia.Plan.Descripcion + "-" + c.Materia.Plan.Especialidad.Descripcion,
+                    Comision = c.Comision.Descripcion + "-" + c.Comision.Anio
+                }).ToList();
 
-            this.cursosDataGridView.DataSource = cursosDisplay;
-
+                this.cursosDataGridView.DataSource = cursosDisplay;
+            }
+            
             if (this.cursosDataGridView.Rows.Count > 0)
             {
                 this.cursosDataGridView.Rows[0].Selected = true;

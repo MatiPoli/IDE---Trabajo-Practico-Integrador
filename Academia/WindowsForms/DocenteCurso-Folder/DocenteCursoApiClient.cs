@@ -36,6 +36,17 @@ namespace WindowsForms.DocenteCurso_Folder
             return entities;
         }
 
+        public static async Task<IEnumerable<Docente_Curso>> GetAllAsyncByDocente(int docentId)
+        {
+            IEnumerable<Docente_Curso> entities = null;
+            HttpResponseMessage response = await client.GetAsync("docentes_cursos/docente/" + docentId);
+            if (response.IsSuccessStatusCode)
+            {
+                entities = await response.Content.ReadAsAsync<IEnumerable<Docente_Curso>>();
+            }
+            return entities;
+        }
+
         public static async Task AddAsync(Docente_Curso entity)
         {
             HttpResponseMessage response = await client.PostAsJsonAsync("docentes_cursos", entity);

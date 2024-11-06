@@ -3,22 +3,21 @@ using System.Globalization;
 
 namespace WindowsForms
 {
-    public partial class PersonaDetalle : Form
+    public partial class UsuarioDetalle : Form
     {
-        private Persona persona;
-        private IEnumerable<Plan> planes;
+        private Usuario usuario;
 
-        public Persona Persona
+        public Usuario Usuario
         {
-            get { return persona; }
+            get { return usuario; }
             set
             {
-                persona = value;
+                usuario = value;
                 this.SetPersona();
             }
         }
         public bool EditMode { get; set; } = false;
-        public PersonaDetalle()
+        public UsuarioDetalle()
         {
             InitializeComponent();
         }
@@ -28,26 +27,16 @@ namespace WindowsForms
 
             if (this.EditMode)
             {
-                this.nombreTextBox.Text = this.persona.Nombre;
-                this.apellidoTextBox.Text = this.persona.Apellido;
-                this.direccionTextBox.Text = this.persona.Direccion;
-                this.emailTextBox.Text = this.persona.Email;
-                this.telefonoTextBox.Text = this.persona.Telefono;
-                this.legajoTextBox.Text = this.persona.Legajo;
-                if (this.persona.Tipo_Persona == 1)
-                {
-                    this.tipoPersonaComboBox.Text = "Alumno";
-                }
-                else if (this.persona.Tipo_Persona == 2)
-                {
-                    this.tipoPersonaComboBox.Text = "Docente";
-                }
-                else if (this.persona.Tipo_Persona == 3)
-                {
-                    this.tipoPersonaComboBox.Text = "Admin";
-                }
+                this.nombreTextBox.Text = this.usuario.Nombre;
+                this.apellidoTextBox.Text = this.usuario.Apellido;
+                this.direccionTextBox.Text = this.usuario.Direccion;
+                this.emailTextBox.Text = this.usuario.Email;
+                this.claveTextBox.Text = this.usuario.Clave;
+                this.telefonoTextBox.Text = this.usuario.Telefono;
+                this.legajoTextBox.Text = this.usuario.Legajo;
+                this.tipoPersonaComboBox.Text = this.usuario.Tipo_Persona;
 
-                if (DateTime.TryParse(this.persona.Fecha_Nac, out DateTime fechaNac))
+                if (DateTime.TryParse(this.usuario.Fecha_Nac, out DateTime fechaNac))
                 {
                     this.fechaNacDateTimePicker.Value = fechaNac;
                 }
@@ -62,44 +51,34 @@ namespace WindowsForms
 
         private async void aceptarButton_Click(object sender, EventArgs e)
         {
-            PersonaApiClient client = new PersonaApiClient();
+            UsuarioApiClient client = new UsuarioApiClient();
 
-            if (this.ValidatePersona())
+            if (this.ValidateUsuario())
             {
-                this.Persona.Nombre = this.nombreTextBox.Text;
-                this.Persona.Apellido = this.apellidoTextBox.Text;
-                this.Persona.Direccion = this.direccionTextBox.Text;
-                this.Persona.Email = this.emailTextBox.Text;
-                this.Persona.Telefono = this.telefonoTextBox.Text;
-                this.Persona.Legajo = this.legajoTextBox.Text;
-                this.Persona.Fecha_Nac = this.fechaNacDateTimePicker.Value.ToString("yyyy-MM-dd");
-                if (this.tipoPersonaComboBox.Text == "Alumno")
-                {
-                    this.Persona.Tipo_Persona = 1;
-                }
-                else if (this.tipoPersonaComboBox.Text == "Docente")
-                {
-                    this.Persona.Tipo_Persona = 2;
-                }
-                else if (this.tipoPersonaComboBox.Text == "Admin")
-                {
-                    this.Persona.Tipo_Persona = 3;
-                }
+                this.usuario.Nombre = this.nombreTextBox.Text;
+                this.usuario.Apellido = this.apellidoTextBox.Text;
+                this.usuario.Direccion = this.direccionTextBox.Text;
+                this.usuario.Email = this.emailTextBox.Text;
+                this.usuario.Clave = this.claveTextBox.Text;
+                this.usuario.Telefono = this.telefonoTextBox.Text;
+                this.usuario.Legajo = this.legajoTextBox.Text;
+                this.usuario.Fecha_Nac = this.fechaNacDateTimePicker.Value.ToString("yyyy-MM-dd");
+                this.usuario.Tipo_Persona = this.tipoPersonaComboBox.Text;
 
                 if (this.EditMode)
                 {
-                    await PersonaApiClient.UpdateAsync(this.Persona);
+                    await UsuarioApiClient.UpdateAsync(this.usuario);
                 }
                 else
                 {
-                    await PersonaApiClient.AddAsync(this.Persona);
+                    await UsuarioApiClient.AddAsync(this.usuario);
                 }
 
                 this.Close();
             }
         }
 
-        private bool ValidatePersona()
+        private bool ValidateUsuario()
         {
             bool isValid = true;
 
@@ -107,11 +86,17 @@ namespace WindowsForms
             errorProvider.SetError(apellidoTextBox, string.Empty);
             errorProvider.SetError(direccionTextBox, string.Empty);
             errorProvider.SetError(emailTextBox, string.Empty);
+            errorProvider.SetError(claveTextBox, string.Empty);
             errorProvider.SetError(telefonoTextBox, string.Empty);
             errorProvider.SetError(legajoTextBox, string.Empty);
             errorProvider.SetError(fechaNacDateTimePicker, string.Empty);
 
 
+            if (this.claveTextBox.Text == string.Empty)
+            {
+                isValid = false;
+                errorProvider.SetError(claveTextBox, "La Clave es Requerida");
+            }
             if (this.nombreTextBox.Text == string.Empty)
             {
                 isValid = false;

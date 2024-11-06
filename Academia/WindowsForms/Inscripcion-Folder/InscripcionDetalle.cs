@@ -6,7 +6,7 @@ namespace WindowsForms.Inscripcion_Folder
     public partial class InscripcionDetalle : Form
     {
         private Inscripcion inscripcion;
-        private IEnumerable<Persona> alumnos;
+        private IEnumerable<Usuario> alumnos;
         private IEnumerable<Curso> cursos;
 
         public Inscripcion Inscripcion
@@ -30,11 +30,11 @@ namespace WindowsForms.Inscripcion_Folder
         }
         public async void SetInscripcion()
         {
-            PersonaApiClient clientPersona = new PersonaApiClient();
+            UsuarioApiClient clientPersona = new UsuarioApiClient();
             CursoApiClient clientCurso = new CursoApiClient();
 
-            this.alumnos = await PersonaApiClient.GetAllAlumnosAsync();
-            foreach (Persona alumno in this.alumnos)
+            this.alumnos = await UsuarioApiClient.GetAllAlumnosAsync();
+            foreach (Usuario alumno in this.alumnos)
             {
                 this.alumnosComboBox.Items.Add(alumno.Legajo + "-" + alumno.Apellido + " " + alumno.Nombre);
             }
@@ -117,6 +117,12 @@ namespace WindowsForms.Inscripcion_Folder
             {
                 isValid = false;
                 errorProvider.SetError(cursosComboBox, "No hay cupo disponible para este curso");
+            }
+            var alumno = this.alumnos.ElementAt(alumnosComboBox.SelectedIndex);
+            if (await InscripcionApiClient.IsAlumnoEnrolledInCurso(alumno.Id,curso.Id))
+            {
+                isValid = false;
+                errorProvider.SetError(alumnosComboBox, "Este alumno ya está inscripto a ese curso");
             }
 
             return isValid;

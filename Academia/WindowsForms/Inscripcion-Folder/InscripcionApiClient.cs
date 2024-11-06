@@ -36,6 +36,28 @@ namespace WindowsForms.Inscripcion_Folder
             return entities;
         }
 
+        public static async Task<IEnumerable<Inscripcion>> GetAllByAlumno(int alumnoId)
+        {
+            IEnumerable<Inscripcion> entities = null;
+            HttpResponseMessage response = await client.GetAsync("inscripciones/alumno/" + alumnoId);
+            if (response.IsSuccessStatusCode)
+            {
+                entities = await response.Content.ReadAsAsync<IEnumerable<Inscripcion>>();
+            }
+            return entities;
+        }
+
+        public static async Task<IEnumerable<Inscripcion>> GetAllByCurso(int cursoId)
+        {
+            IEnumerable<Inscripcion> entities = null;
+            HttpResponseMessage response = await client.GetAsync("inscripciones/curso/" + cursoId);
+            if (response.IsSuccessStatusCode)
+            {
+                entities = await response.Content.ReadAsAsync<IEnumerable<Inscripcion>>();
+            }
+            return entities;
+        }
+
         public static async Task AddAsync(Inscripcion entity)
         {
             HttpResponseMessage response = await client.PostAsJsonAsync("inscripciones", entity);
@@ -64,6 +86,29 @@ namespace WindowsForms.Inscripcion_Folder
                 thereIsCupo = await response.Content.ReadAsAsync<bool>();
             }
             return thereIsCupo;
+        }
+
+        public static async Task<bool> IsAlumnoEnrolledInCurso(int alumnoId, int cursoId)
+        {
+            bool IsAlumnoEnrolledInCurso = false;
+            HttpResponseMessage response = await client.GetAsync("inscripciones/IsAlumnoEnrolledInCurso/" + alumnoId + "/" + cursoId);
+            response.EnsureSuccessStatusCode();
+            if (response.IsSuccessStatusCode)
+            {
+                IsAlumnoEnrolledInCurso = await response.Content.ReadAsAsync<bool>();
+            }
+            return IsAlumnoEnrolledInCurso;
+        }
+
+        public static async Task<IEnumerable<Curso>> GetCursosWithCupoAsync(int id)
+        {
+            IEnumerable<Curso> entities = null;
+            HttpResponseMessage response = await client.GetAsync("/inscripciones/cursosWithCupo/" + id);
+            if (response.IsSuccessStatusCode)
+            {
+                entities = await response.Content.ReadAsAsync<IEnumerable<Curso>>();
+            }
+            return entities;
         }
     }
 }

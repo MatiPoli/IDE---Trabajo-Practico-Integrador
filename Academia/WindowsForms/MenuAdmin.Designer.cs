@@ -1,6 +1,6 @@
 ﻿namespace WindowsForms
 {
-    partial class MenuPrincipal
+    partial class MenuAdmin
     {
         /// <summary>
         /// Required designer variable.
@@ -36,21 +36,22 @@
             cursosButton = new Button();
             inscripcionesButton = new Button();
             docenteCursoButton = new Button();
+            label1 = new Label();
             SuspendLayout();
             // 
             // personasButton
             // 
-            personasButton.Location = new Point(39, 34);
+            personasButton.Location = new Point(39, 53);
             personasButton.Name = "personasButton";
             personasButton.Size = new Size(138, 23);
             personasButton.TabIndex = 0;
-            personasButton.Text = "Listado Personas";
+            personasButton.Text = "Listado Usuarios";
             personasButton.UseVisualStyleBackColor = true;
             personasButton.Click += personasButton_Click;
             // 
             // planesButton
             // 
-            planesButton.Location = new Point(39, 63);
+            planesButton.Location = new Point(39, 82);
             planesButton.Name = "planesButton";
             planesButton.Size = new Size(138, 23);
             planesButton.TabIndex = 1;
@@ -60,7 +61,7 @@
             // 
             // especialidadesButton
             // 
-            especialidadesButton.Location = new Point(39, 92);
+            especialidadesButton.Location = new Point(39, 111);
             especialidadesButton.Name = "especialidadesButton";
             especialidadesButton.Size = new Size(138, 23);
             especialidadesButton.TabIndex = 2;
@@ -70,7 +71,7 @@
             // 
             // materiasButton
             // 
-            materiasButton.Location = new Point(39, 121);
+            materiasButton.Location = new Point(39, 140);
             materiasButton.Name = "materiasButton";
             materiasButton.Size = new Size(138, 23);
             materiasButton.TabIndex = 3;
@@ -80,7 +81,7 @@
             // 
             // comisionesButton
             // 
-            comisionesButton.Location = new Point(39, 150);
+            comisionesButton.Location = new Point(39, 169);
             comisionesButton.Name = "comisionesButton";
             comisionesButton.Size = new Size(138, 23);
             comisionesButton.TabIndex = 4;
@@ -90,7 +91,7 @@
             // 
             // cursosButton
             // 
-            cursosButton.Location = new Point(39, 179);
+            cursosButton.Location = new Point(39, 198);
             cursosButton.Name = "cursosButton";
             cursosButton.Size = new Size(138, 23);
             cursosButton.TabIndex = 5;
@@ -100,7 +101,7 @@
             // 
             // inscripcionesButton
             // 
-            inscripcionesButton.Location = new Point(39, 208);
+            inscripcionesButton.Location = new Point(39, 227);
             inscripcionesButton.Name = "inscripcionesButton";
             inscripcionesButton.Size = new Size(138, 23);
             inscripcionesButton.TabIndex = 6;
@@ -110,7 +111,7 @@
             // 
             // docenteCursoButton
             // 
-            docenteCursoButton.Location = new Point(39, 237);
+            docenteCursoButton.Location = new Point(39, 256);
             docenteCursoButton.Name = "docenteCursoButton";
             docenteCursoButton.Size = new Size(138, 23);
             docenteCursoButton.TabIndex = 7;
@@ -118,11 +119,23 @@
             docenteCursoButton.UseVisualStyleBackColor = true;
             docenteCursoButton.Click += docenteCursoButton_Click;
             // 
-            // MenuPrincipal
+            // label1
+            // 
+            label1.Anchor = AnchorStyles.Left;
+            label1.AutoSize = true;
+            label1.Location = new Point(68, 23);
+            label1.Name = "label1";
+            label1.Size = new Size(77, 15);
+            label1.TabIndex = 8;
+            label1.Text = "Menú Admin";
+            label1.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // MenuAdmin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(215, 296);
+            ClientSize = new Size(215, 304);
+            Controls.Add(label1);
             Controls.Add(docenteCursoButton);
             Controls.Add(inscripcionesButton);
             Controls.Add(cursosButton);
@@ -131,11 +144,15 @@
             Controls.Add(especialidadesButton);
             Controls.Add(planesButton);
             Controls.Add(personasButton);
-            Name = "MenuPrincipal";
+            MaximumSize = new Size(231, 343);
+            MinimumSize = new Size(231, 343);
+            Name = "MenuAdmin";
             Padding = new Padding(50);
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "MenuPrincipal";
+            Text = "Menu Admin";
+            Load += MenuAdmin_Load;
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -148,5 +165,6 @@
         private Button cursosButton;
         private Button inscripcionesButton;
         private Button docenteCursoButton;
+        private Label label1;
     }
 }

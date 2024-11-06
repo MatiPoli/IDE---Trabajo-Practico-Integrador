@@ -57,6 +57,22 @@ namespace Domain.Services
                 .ToList();
         }
 
+        public IEnumerable<Docente_Curso> GetAllByDocente(int docentId)
+        {
+            using var context = new AcademiaContext();
+
+            return context.Docentes_Cursos
+                .Include(dc => dc.Curso)
+                    .ThenInclude(curso => curso.Materia)
+                        .ThenInclude(materia => materia.Plan)
+                            .ThenInclude(plan => plan.Especialidad)
+                .Where(dc => dc.Docente.Id == docentId)
+                .Include(dc => dc.Curso)
+                    .ThenInclude(curso => curso.Comision)
+                .Include(dc => dc.Docente)
+                .ToList();
+        }
+
         public void Update(Docente_Curso docentes_Cursos)
         {
             using var context = new AcademiaContext();

@@ -8,7 +8,7 @@ namespace WindowsForms.DocenteCurso_Folder
     {
         private Docente_Curso docenteCurso;
         private IEnumerable<Curso> cursos;
-        private IEnumerable<Persona> docentes;
+        private IEnumerable<Usuario> docentes;
         public Docente_Curso DocenteCurso
         {
             get { return docenteCurso; }
@@ -27,15 +27,15 @@ namespace WindowsForms.DocenteCurso_Folder
         public async void SetDocenteCurso()
         {
             CursoApiClient clientCurso = new CursoApiClient();
-            PersonaApiClient clientPersona = new PersonaApiClient();
+            UsuarioApiClient clientPersona = new UsuarioApiClient();
 
             this.cursos = await CursoApiClient.GetAllAsync();
             foreach (Curso curso in this.cursos)
             {
                 this.cursosComboBox.Items.Add(curso.Anio_Calendario + "-" + curso.Materia.Descripcion + "-" + curso.Comision.Descripcion);
             }
-            this.docentes = await PersonaApiClient.GetAllDocentesAsync();
-            foreach (Persona docente in this.docentes)
+            this.docentes = await UsuarioApiClient.GetAllDocentesAsync();
+            foreach (Usuario docente in this.docentes)
             {
                 this.docentesComboBox.Items.Add(docente.Legajo + "-" + docente.Apellido + " " + docente.Nombre);
             }

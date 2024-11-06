@@ -1,13 +1,13 @@
-﻿@page "/personas"
+﻿@page "/usuarios"
 @inject HttpClient Http
 @using Domain.Models
 @using System.Net.Http.Headers
-<PageTitle>Personas</PageTitle>
+<PageTitle>Usuarios</PageTitle>
 
-<h1>Personas</h1>
+<h1>Usuarios</h1>
 
 
-@if (personas == null)
+@if (usuarios == null)
 {
     <p><em>Cargando...</em></p>
 }
@@ -24,20 +24,22 @@ else
                 <th>Telefono</th>
                 <th>Fecha de Nacimiento</th>
                 <th>Legajo</th>
+                <th>Tipo de Persona</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var persona in personas)
+            @foreach (var usuario in usuarios)
             {
                 <tr>
-                    <td>@persona.Id</td>
-                    <td>@persona.Nombre</td>
-                    <td>@persona.Apellido</td>
-                    <td>@persona.Direccion</td>
-                    <td>@persona.Email</td>
-                    <td>@persona.Telefono</td>
-                    <td>@persona.Fecha_Nac</td>
-                    <td>@persona.Legajo</td>
+                    <td>@usuario.Id</td>
+                    <td>@usuario.Nombre</td>
+                    <td>@usuario.Apellido</td>
+                    <td>@usuario.Direccion</td>
+                    <td>@usuario.Email</td>
+                    <td>@usuario.Telefono</td>
+                    <td>@usuario.Fecha_Nac</td>
+                    <td>@usuario.Legajo</td>
+                    <td>@usuario.Tipo_Persona</td>
                 </tr>
             }
         </tbody>
@@ -45,18 +47,18 @@ else
 }
 
 @code {
-    private IEnumerable<Persona> personas;
+    private IEnumerable<Usuario> usuarios;
 
     protected override async Task OnInitializedAsync()
     {
-        PersonasApiClient client = new PersonasApiClient();
+        UsuariosApiClient client = new UsuariosApiClient();
 
-        personas = await PersonasApiClient.GetAllAsync();
+        usuarios = await UsuariosApiClient.GetAllAsync();
     }
-    public class PersonasApiClient
+    public class UsuariosApiClient
     {
         private static HttpClient client = new HttpClient();
-        static PersonasApiClient()
+        static UsuariosApiClient()
         {
             client.BaseAddress = new Uri("http://localhost:5003/");
             client.DefaultRequestHeaders.Accept.Clear();
@@ -64,16 +66,16 @@ else
                 new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        public static async Task<IEnumerable<Persona>> GetAllAsync()
+        public static async Task<IEnumerable<Usuario>> GetAllAsync()
         {
-            IEnumerable<Persona> personas = null;
-            HttpResponseMessage response = await client.GetAsync("personas");
+            IEnumerable<Usuario> usuarios = null;
+            HttpResponseMessage response = await client.GetAsync("usuarios");
             if (response.IsSuccessStatusCode)
             {
-                personas = await response.Content.ReadAsAsync<IEnumerable<Persona>>();
+                usuarios = await response.Content.ReadAsAsync<IEnumerable<Usuario>>();
 
             }
-            return personas;
+            return usuarios;
         }
 
     }

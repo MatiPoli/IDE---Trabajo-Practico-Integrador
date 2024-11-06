@@ -8,16 +8,16 @@ using WindowsForms.Materia_Folder;
 
 namespace WindowsForms
 {
-    public partial class MenuPrincipal : Form
+    public partial class MenuAdmin : Form
     {
-        public MenuPrincipal()
+        public MenuAdmin()
         {
             InitializeComponent();
         }
 
         private void personasButton_Click(object sender, EventArgs e)
         {
-            PersonaLista personaLista = new PersonaLista();
+            UsuarioLista personaLista = new UsuarioLista();
             personaLista.ShowDialog();
         }
 
@@ -61,6 +61,11 @@ namespace WindowsForms
         {
             DocenteCursoLista docenteCursoLista = new DocenteCursoLista();
             docenteCursoLista.ShowDialog();
+        }
+
+        private void MenuAdmin_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

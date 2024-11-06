@@ -57,6 +57,38 @@ namespace Domain.Services
                 .ToList();
         }
 
+        public IEnumerable<Inscripcion> GetAllByAlumno(int alumnoId)
+        {
+            using var context = new AcademiaContext();
+
+            return context.Inscripciones
+                .Where(i => i.Alumno.Id == alumnoId)
+                .Include(i => i.Alumno)
+                .Include(i => i.Curso)
+                    .ThenInclude(curso => curso.Comision)
+                .Include(i => i.Curso)
+                    .ThenInclude(curso => curso.Materia)
+                        .ThenInclude(materia => materia.Plan)
+                            .ThenInclude(plan => plan.Especialidad)
+                .ToList();
+        }
+
+        public IEnumerable<Inscripcion> GetAllByCurso(int cursoId)
+        {
+            using var context = new AcademiaContext();
+
+            return context.Inscripciones
+                .Where(i => i.Curso.Id == cursoId)
+                .Include(i => i.Alumno)
+                .Include(i => i.Curso)
+                    .ThenInclude(curso => curso.Comision)
+                .Include(i => i.Curso)
+                    .ThenInclude(curso => curso.Materia)
+                        .ThenInclude(materia => materia.Plan)
+                            .ThenInclude(plan => plan.Especialidad)
+                .ToList();
+        }
+
         public void Update(Inscripcion inscripcion)
         {
             using var context = new AcademiaContext();
@@ -73,6 +105,22 @@ namespace Domain.Services
             }
         }
 
+        public IEnumerable<Curso> GetAllWithCupos(int alumnoId)
+        {
+            using var context = new AcademiaContext();
+
+            var cursos = context.Cursos
+                .Include(c => c.Comision)
+                .Include(c => c.Materia)
+                    .ThenInclude(m => m.Plan)
+                        .ThenInclude(p => p.Especialidad)
+                .ToList();
+
+            var cursosConCupo = cursos.Where(c => ThereIsCupo(c.Id) && !IsAlumnoEnrolledInCurso(alumnoId, c.Id)).ToList();
+
+            return cursosConCupo;
+        }
+
         public bool ThereIsCupo(int id)
         {
             using var context = new AcademiaContext();
@@ -80,6 +128,14 @@ namespace Domain.Services
             Curso? curso = context.Cursos.Find(id);
             return context.Inscripciones
                 .Count(i => i.Curso.Id == curso.Id) < curso.Cupo;
+        }
+
+        public bool IsAlumnoEnrolledInCurso(int alumnoId, int cursoId)
+        {
+            using var context = new AcademiaContext();
+
+            return context.Inscripciones
+                .Any(i => i.Alumno.Id == alumnoId && i.Curso.Id == cursoId);
         }
     }
 }

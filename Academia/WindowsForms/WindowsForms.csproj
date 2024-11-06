@@ -17,8 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Alumno-Folder\" />
-    <Folder Include="Docente-Folder\" />
     <Folder Include="Shared\" />
   </ItemGroup>
 

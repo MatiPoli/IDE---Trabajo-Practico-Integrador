@@ -7,7 +7,7 @@ namespace Domain.Context
 {
     internal class AcademiaContext : DbContext
     {
-        internal DbSet<Persona> Personas { get; set; }
+        internal DbSet<Usuario> Usuarios { get; set; }
         internal DbSet<Plan> Planes { get; set; }
         internal DbSet<Especialidad> Especialidades { get; set; }
         internal DbSet<Materia> Materias { get; set; }
@@ -21,20 +21,21 @@ namespace Domain.Context
         {
             //this.Database.EnsureDeleted();
             this.Database.EnsureCreated();
+            this.EnsureAdminCreated();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Initial Catalog=Academia1;Integrated Security=true");
+            optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Initial Catalog=Academia;Integrated Security=true");
             optionsBuilder.LogTo(Console.WriteLine, LogLevel.Information);
         }
-       
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Curso>()
-        .HasOne(c => c.Materia)
-        .WithMany()
-        .OnDelete(DeleteBehavior.Restrict);
+                .HasOne(c => c.Materia)
+                .WithMany()
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Curso>()
                 .HasOne(c => c.Comision)
@@ -66,8 +67,36 @@ namespace Domain.Context
                 .HasOne(i => i.Curso)
                 .WithMany()
                 .OnDelete(DeleteBehavior.Restrict);
-        }
-       
-    }
 
+            
+        }
+
+        private void EnsureAdminCreated()
+        {
+            Usuario admin = Usuarios.FirstOrDefault(p => p.Tipo_Persona == "Admin");
+
+            if (admin == null)
+            {
+                admin = new Usuario
+                {
+                    Email = "admin@admin.com",
+                    Clave = "admin",
+                    Nombre = "admin",
+                    Apellido = "admin",
+                    Direccion = "admin",
+                    Telefono = "admin",
+                    Fecha_Nac = "01/01/2000",
+                    Legajo = "11111",
+                    Tipo_Persona = "Admin"
+                };
+                Console.WriteLine("/n/nSe creó el usuario 'Admin'./nEmail: 'admin@admin.com'/nClave: 'admin'/n/n");
+                this.Usuarios.Add(admin);
+                this.SaveChanges();
+            }
+            else
+            {
+                Console.WriteLine("/n/nUsuario 'Admin' ya existe./nEmail: 'admin@admin.com'/nClave: 'admin'/n/n");
+            }
+        }
+    }
 }

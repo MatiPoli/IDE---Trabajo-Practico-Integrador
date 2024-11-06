@@ -7,7 +7,6 @@ namespace WindowsForms.Comision_Folder
     public partial class ComisionDetalle : Form
     {
         private Comision comision;
-        private IEnumerable<Plan> planes;
         public Comision Comision
         {
             get { return comision; }

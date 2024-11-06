@@ -1,6 +1,6 @@
 ﻿namespace WindowsForms
 {
-    partial class PersonaLista
+    partial class UsuarioLista
     {
         /// <summary>
         ///  Required designer variable.
@@ -28,27 +28,28 @@
         /// </summary>
         private void InitializeComponent()
         {
-            personasDataGridView = new DataGridView();
+            usuariosDataGridView = new DataGridView();
             agregarButton = new Button();
             modificarButton = new Button();
             eliminarButton = new Button();
-            ((System.ComponentModel.ISupportInitialize)personasDataGridView).BeginInit();
+            filtroTextBox = new TextBox();
+            ((System.ComponentModel.ISupportInitialize)usuariosDataGridView).BeginInit();
             SuspendLayout();
             // 
-            // personasDataGridView
+            // usuariosDataGridView
             // 
-            personasDataGridView.AllowUserToAddRows = false;
-            personasDataGridView.AllowUserToDeleteRows = false;
-            personasDataGridView.AllowUserToResizeRows = false;
-            personasDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            personasDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            personasDataGridView.Location = new Point(12, 12);
-            personasDataGridView.MultiSelect = false;
-            personasDataGridView.Name = "personasDataGridView";
-            personasDataGridView.ReadOnly = true;
-            personasDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            personasDataGridView.Size = new Size(760, 408);
-            personasDataGridView.TabIndex = 0;
+            usuariosDataGridView.AllowUserToAddRows = false;
+            usuariosDataGridView.AllowUserToDeleteRows = false;
+            usuariosDataGridView.AllowUserToResizeRows = false;
+            usuariosDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            usuariosDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            usuariosDataGridView.Location = new Point(12, 12);
+            usuariosDataGridView.MultiSelect = false;
+            usuariosDataGridView.Name = "usuariosDataGridView";
+            usuariosDataGridView.ReadOnly = true;
+            usuariosDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            usuariosDataGridView.Size = new Size(760, 408);
+            usuariosDataGridView.TabIndex = 0;
             // 
             // agregarButton
             // 
@@ -80,30 +81,43 @@
             eliminarButton.UseVisualStyleBackColor = true;
             eliminarButton.Click += eliminarButton_Click;
             // 
-            // PersonaLista
+            // filtroTextBox
+            // 
+            filtroTextBox.Location = new Point(12, 427);
+            filtroTextBox.Name = "filtroTextBox";
+            filtroTextBox.PlaceholderText = "Filtrar por Nombre / Apellido / Email ...";
+            filtroTextBox.Size = new Size(285, 23);
+            filtroTextBox.TabIndex = 5;
+            filtroTextBox.TextChanged += filtroTextBox_TextChanged;
+            // 
+            // UsuarioLista
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(784, 461);
+            Controls.Add(filtroTextBox);
             Controls.Add(eliminarButton);
             Controls.Add(modificarButton);
             Controls.Add(agregarButton);
-            Controls.Add(personasDataGridView);
+            Controls.Add(usuariosDataGridView);
             MaximumSize = new Size(800, 500);
             MinimumSize = new Size(800, 500);
-            Name = "PersonaLista";
+            Name = "UsuarioLista";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Listado Personas";
-            Load += PersonaLista_Load;
-            ((System.ComponentModel.ISupportInitialize)personasDataGridView).EndInit();
+            Text = "Listado Usuarios";
+            Load += UsuarioLista_Load;
+            ((System.ComponentModel.ISupportInitialize)usuariosDataGridView).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
-        private DataGridView personasDataGridView;
+        private DataGridView usuariosDataGridView;
         private Button agregarButton;
         private Button modificarButton;
         private Button eliminarButton;
+        private Button button1;
+        private TextBox filtroTextBox;
     }
 }
